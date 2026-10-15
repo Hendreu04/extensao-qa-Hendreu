@@ -7,7 +7,7 @@
 * **Ambiente de Testes**: [https://sifit.centrion.com.br](https://sifit.centrion.com.br)
 * **Tipo de Teste**: Teste Funcional Manual
 * **Data do Documento**: 02/10/2026
-* **Responsável**: Hendreu
+* **Responsável**: Hendreu Satoshi Zampieri Itami (240061)
 
 ---
 
