@@ -310,3 +310,117 @@
 |                **Evidência(s)**               |
 | :-------------------------------------------: |
 | [Vídeo](https://jam.dev/c/191aafea-be89-4847-9fad-2483724ea9ba) (0:05 a 0:09) |
+
+---
+
+### 🐞 **Bug 09: Mensagem "Selecione o Tipo de Pagamento" continua na tela após selecionar o tipo**
+
+| **ID**     | **Descrição**                                                                                                                                  |
+| ---------- | ---------------------------------------------------------------------------------------------------------------------------------------------- |
+| BUG-009    | Ao salvar a matrícula sem tipo de pagamento, a mensagem "Selecione o Tipo de Pagamento" é exibida. Depois de selecionar "Dinheiro", a mensagem continua aparecendo abaixo do campo. |
+
+| **Severidade do Bug** | **Prioridade de Correção** | **Status** |
+| :-------------------: | :------------------------: | :--------: |
+|         Baixa         |           Baixa            |   Aberto   |
+
+| **Passo a passo para simular o bug**                           |
+| -------------------------------------------------------------- |
+| 1. Acessar "Matrículas" e clicar em "Cadastrar Matrícula" |
+| 2. Selecionar o cliente e o plano |
+| 3. Clicar em "Salvar" sem selecionar o Tipo Pagamento |
+| 4. Selecionar "Dinheiro" no campo Tipo Pagamento |
+
+|                        **Comportamento Esperado**                       |                        **Comportamento Obtido**                        |
+| :---------------------------------------------------------------------: | :--------------------------------------------------------------------: |
+| A mensagem deve sumir assim que o tipo de pagamento for selecionado. | A mensagem continua exibida em vermelho com o campo já preenchido. |
+
+| **Ambiente**             |
+| ------------------------ |
+| Ambiente de testes.      |
+| Desktop com Windows 11.  |
+| Chrome 155.0.8059.85     |
+| SIFIT                    |
+
+| **Funcionalidade Afetada** |           **Caso de Teste Relacionado**            |
+| :------------------------: | :------------------------------------------------: |
+|         Matrículas         | C04-CT03: Tentar cadastrar matrícula sem tipo de pagamento |
+
+|                **Evidência(s)**               |
+| :-------------------------------------------: |
+| [Vídeo](https://jam.dev/c/941b9966-edb4-4e75-9d37-31f95071a55d) (0:58 a 1:14) |
+
+---
+
+### 🐞 **Bug 10: Tela de pagamento da matrícula abre com tipo de pagamento vazio e título repetido**
+
+| **ID**     | **Descrição**                                                                                                                                  |
+| ---------- | ---------------------------------------------------------------------------------------------------------------------------------------------- |
+| BUG-010    | Após salvar a matrícula e confirmar o pagamento, a tela "Cadastrar Conta a Receber" abre com o Tipo de Pagamento vazio, mesmo com "Dinheiro" escolhido na matrícula, e com o título "Plano Plano Hendreu". |
+
+| **Severidade do Bug** | **Prioridade de Correção** | **Status** |
+| :-------------------: | :------------------------: | :--------: |
+|         Baixa         |           Média            |   Aberto   |
+
+| **Passo a passo para simular o bug**                           |
+| -------------------------------------------------------------- |
+| 1. Cadastrar uma matrícula com o tipo de pagamento "Dinheiro" |
+| 2. Clicar em "Salvar" |
+| 3. Clicar em "Confirmar" na mensagem "Deseja pagar a conta a receber agora?" |
+| 4. Observar os campos Título e Tipo de Pagamento |
+
+|                        **Comportamento Esperado**                       |                        **Comportamento Obtido**                        |
+| :---------------------------------------------------------------------: | :--------------------------------------------------------------------: |
+| Os campos devem vir com os dados informados na matrícula e o título sem palavras repetidas. | O Tipo de Pagamento vem vazio e o título aparece como "Plano Plano Hendreu". |
+
+| **Ambiente**             |
+| ------------------------ |
+| Ambiente de testes.      |
+| Desktop com Windows 11.  |
+| Chrome 155.0.8059.85     |
+| SIFIT                    |
+
+| **Funcionalidade Afetada** |           **Caso de Teste Relacionado**            |
+| :------------------------: | :------------------------------------------------: |
+|         Matrículas / Contas a Receber         | C04-CT01: Cadastrar matrícula com dados válidos |
+
+|                **Evidência(s)**               |
+| :-------------------------------------------: |
+| [Vídeo](https://jam.dev/c/941b9966-edb4-4e75-9d37-31f95071a55d) (1:18 a 1:23) |
+
+---
+
+### 🐞 **Bug 11: Card "Cadastradas este Mês" mostra 0 com matrícula cadastrada no mês**
+
+| **ID**     | **Descrição**                                                                                                                                  |
+| ---------- | ---------------------------------------------------------------------------------------------------------------------------------------------- |
+| BUG-011    | A matrícula #238 do cliente "Hendreu Teste" foi cadastrada em 18/10/2026 e aparece como ATIVO na lista, mas o card "Cadastradas este Mês" da tela de Matrículas continua exibindo 0. |
+
+| **Severidade do Bug** | **Prioridade de Correção** | **Status** |
+| :-------------------: | :------------------------: | :--------: |
+|         Média         |           Média            |   Aberto   |
+
+| **Passo a passo para simular o bug**                           |
+| -------------------------------------------------------------- |
+| 1. Cadastrar uma matrícula com a data atual                    |
+| 2. Acessar o menu "Matrículas"                                 |
+| 3. Observar a matrícula na lista                               |
+| 4. Observar o card "Cadastradas este Mês"                      |
+
+|                        **Comportamento Esperado**                       |                        **Comportamento Obtido**                        |
+| :---------------------------------------------------------------------: | :--------------------------------------------------------------------: |
+| O card deve contar as matrículas cadastradas no mês atual.              | O card exibe 0, mesmo com a matrícula #238 cadastrada no mês.          |
+
+| **Ambiente**             |
+| ------------------------ |
+| Ambiente de testes.      |
+| Desktop com Windows 11.  |
+| Chrome 155.0.8059.85     |
+| SIFIT                    |
+
+| **Funcionalidade Afetada** |           **Caso de Teste Relacionado**            |
+| :------------------------: | :------------------------------------------------: |
+|         Matrículas         | C04-CT01: Cadastrar matrícula com dados válidos    |
+
+|                **Evidência(s)**               |
+| :-------------------------------------------: |
+| [Captura de tela](https://jam.dev/c/06e32ae4-06b8-4d29-937c-d7fee97cbf6c) |
