@@ -195,3 +195,118 @@
 |                **Evidência(s)**               |
 | :-------------------------------------------: |
 | [Vídeo](https://jam.dev/c/7e8be00d-94a9-4a63-93e8-88c9c38faab4) (0:51) |
+
+---
+
+### 🐞 **Bug 06: Erro genérico ao salvar plano sem grupo selecionado**
+
+| **ID**     | **Descrição**                                                                                                                                  |
+| ---------- | ---------------------------------------------------------------------------------------------------------------------------------------------- |
+| BUG-006    | Ao salvar um plano com nome e valor preenchidos, mas sem selecionar o Grupo, o sistema exibe apenas "Erro ao salvar plano", sem indicar o campo com problema. O campo Grupo não aparece como obrigatório na tela, mas a coluna grupo_id da tabela planos não aceita valor vazio. |
+
+| **Severidade do Bug** | **Prioridade de Correção** | **Status** |
+| :-------------------: | :------------------------: | :--------: |
+|         Média         |           Alta             |   Aberto   |
+
+| **Passo a passo para simular o bug**                           |
+| -------------------------------------------------------------- |
+| 1. Acessar o menu "Planos"                                     |
+| 2. Clicar em "Novo Plano"                                      |
+| 3. Preencher "Plano Hendreu" no Nome e "99,90" no Valor Mensal |
+| 4. Deixar o campo Grupo sem seleção                            |
+| 5. Clicar em "Salvar Plano"                                    |
+
+|                        **Comportamento Esperado**                       |                        **Comportamento Obtido**                        |
+| :---------------------------------------------------------------------: | :--------------------------------------------------------------------: |
+| O campo Grupo deve ser marcado como obrigatório e o sistema deve avisar que ele precisa ser preenchido. | O plano não é salvo e aparece apenas a mensagem "Erro ao salvar plano". |
+
+| **Ambiente**             |
+| ------------------------ |
+| Ambiente de testes.      |
+| Desktop com Windows 11.  |
+| Chrome 155.0.8059.85     |
+| SIFIT                    |
+
+| **Funcionalidade Afetada** |           **Caso de Teste Relacionado**            |
+| :------------------------: | :------------------------------------------------: |
+|           Planos           | C05-CT01: Adicionar novo plano com dados válidos   |
+
+|                **Evidência(s)**               |
+| :-------------------------------------------: |
+| [Vídeo](https://jam.dev/c/516e542a-5e59-4187-9379-bed8d372a748) (0:31 a 0:33) |
+| [Vídeo de confirmação](https://jam.dev/c/707ed084-77ce-4631-8406-2103a828bb1c) (0:07 a 0:21): com o Grupo "Treino Livre" selecionado, o mesmo plano é salvo normalmente |
+
+---
+
+### 🐞 **Bug 07: Quantidade de alunos do plano diferente entre o ranking e a lista de planos**
+
+| **ID**     | **Descrição**                                                                                                                                  |
+| ---------- | ---------------------------------------------------------------------------------------------------------------------------------------------- |
+| BUG-007    | O plano #56 "Teste Diaria QA Verify" aparece com 1 aluno no ranking "Planos com mais alunos", mas com 0 alunos na coluna Alunos da lista de planos. |
+
+| **Severidade do Bug** | **Prioridade de Correção** | **Status** |
+| :-------------------: | :------------------------: | :--------: |
+|         Média         |           Média            |   Aberto   |
+
+| **Passo a passo para simular o bug**                           |
+| -------------------------------------------------------------- |
+| 1. Acessar o menu "Planos"                                     |
+| 2. Digitar "Teste Diaria QA Verify" no campo Nome e clicar em "Buscar" |
+| 3. Comparar a quantidade de alunos do ranking com a coluna Alunos da lista |
+
+|                        **Comportamento Esperado**                       |                        **Comportamento Obtido**                        |
+| :---------------------------------------------------------------------: | :--------------------------------------------------------------------: |
+| A quantidade de alunos deve ser a mesma no ranking e na lista.          | O ranking mostra 1 aluno e a lista mostra 0.                           |
+
+| **Ambiente**             |
+| ------------------------ |
+| Ambiente de testes.      |
+| Desktop com Windows 11.  |
+| Chrome 155.0.8059.85     |
+| SIFIT                    |
+
+| **Funcionalidade Afetada** |           **Caso de Teste Relacionado**            |
+| :------------------------: | :------------------------------------------------: |
+|           Planos           | C05-CT03: Verificar quantidade de alunos por plano |
+
+|                **Evidência(s)**               |
+| :-------------------------------------------: |
+| [Vídeo](https://jam.dev/c/191aafea-be89-4847-9fad-2483724ea9ba) (0:05) |
+
+---
+
+### 🐞 **Bug 08: Mensalidade e Receita Estimada aparecem zeradas em plano com valor e aluno**
+
+| **ID**     | **Descrição**                                                                                                                                  |
+| ---------- | ---------------------------------------------------------------------------------------------------------------------------------------------- |
+| BUG-008    | O plano #56 tem valor de R$ 25,00 e 1 aluno, mas o ranking exibe "Mensalidade R$ 0,00" e o card "Receita Estimada" exibe R$ 0,00. |
+
+| **Severidade do Bug** | **Prioridade de Correção** | **Status** |
+| :-------------------: | :------------------------: | :--------: |
+|         Média         |           Média            |   Aberto   |
+
+| **Passo a passo para simular o bug**                           |
+| -------------------------------------------------------------- |
+| 1. Acessar o menu "Planos"                                     |
+| 2. Observar o card "Receita Estimada" no topo da tela          |
+| 3. Observar a "Mensalidade" no ranking "Planos com mais alunos" |
+| 4. Comparar com a coluna Valor do plano na lista               |
+
+|                        **Comportamento Esperado**                       |                        **Comportamento Obtido**                        |
+| :---------------------------------------------------------------------: | :--------------------------------------------------------------------: |
+| A mensalidade e a receita estimada devem considerar o valor do plano e a quantidade de alunos. | Os dois valores aparecem como R$ 0,00, mesmo com o plano de R$ 25,00 e 1 aluno. |
+
+| **Ambiente**             |
+| ------------------------ |
+| Ambiente de testes.      |
+| Desktop com Windows 11.  |
+| Chrome 155.0.8059.85     |
+| SIFIT                    |
+
+| **Funcionalidade Afetada** |           **Caso de Teste Relacionado**            |
+| :------------------------: | :------------------------------------------------: |
+|           Planos           | C05-CT03: Verificar quantidade de alunos por plano |
+
+|                **Evidência(s)**               |
+| :-------------------------------------------: |
+| [Vídeo](https://jam.dev/c/191aafea-be89-4847-9fad-2483724ea9ba) (0:05 a 0:09) |
