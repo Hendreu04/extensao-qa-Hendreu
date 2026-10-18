@@ -14,7 +14,7 @@
 | :---------------------------------------------------------------- |
 | **DADO** que o usuário acessa o menu "Matrículas"                 |
 | **E** clica em "Cadastrar Matrícula"                              |
-| **E** seleciona o cliente "Hendreu Teste" e o plano "Plano Diário" |
+| **E** seleciona o cliente "Hendreu Teste" e o plano "Plano Hendreu" |
 | **QUANDO** clicar em "Salvar"                                     |
 | **ENTÃO** a matrícula deve ser exibida na lista com status "ATIVO" |
 
@@ -47,24 +47,24 @@
 
 ---
 
-### Caso de Teste 03: Cadastrar matrícula com data final anterior à inicial.
+### Caso de Teste 03: Tentar cadastrar matrícula sem tipo de pagamento.
 
-| ID       | Descrição                                                  |
-| :------- | :--------------------------------------------------------- |
-| C04-CT03 | O sistema deve impedir um período de matrícula inválido.   |
+| ID       | Descrição                                                        |
+| :------- | :--------------------------------------------------------------- |
+| C04-CT03 | O sistema deve impedir a matrícula sem tipo de pagamento.        |
 
 | **Pré-condições**                                             |
 | :------------------------------------------------------------ |
-| O cliente deve estar cadastrado no sistema.                   |
+| O cliente deve estar cadastrado e existir um plano ativo.     |
 
 | **Passos**                                                        |
 | :---------------------------------------------------------------- |
 | **DADO** que o usuário acessa a tela "Cadastrar Matrícula"        |
 | **E** seleciona o cliente e o plano                               |
-| **E** informa a data final anterior à data inicial                |
+| **E** não seleciona o tipo de pagamento                           |
 | **QUANDO** clicar em "Salvar"                                     |
-| **ENTÃO** uma mensagem de erro deve ser exibida sobre as datas    |
+| **ENTÃO** a mensagem "Selecione o Tipo de Pagamento" deve ser exibida |
 
 | **Critérios de aceitação**                                      |
 | :-------------------------------------------------------------- |
-| O sistema não deve aceitar o período inválido.                  |
+| A matrícula não deve ser salva sem o tipo de pagamento.         |
