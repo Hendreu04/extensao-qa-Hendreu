@@ -617,3 +617,80 @@
 | :-------------------------------------------: |
 | [Vídeo](https://jam.dev/c/824d0d2e-0223-4c8e-b5c3-f4f7d4181fdc) (0:40, entrada 22:43 com relógio 19:44) |
 | Consulta no banco: created_at 2026-10-21 22:43:30 |
+
+---
+
+### 🐞 **Bug 17: Conta a receber em dinheiro pede bandeira de cartão e a lista de bandeiras vem vazia**
+
+| **ID**     | **Descrição**                                                                                                                                  |
+| ---------- | ---------------------------------------------------------------------------------------------------------------------------------------------- |
+| BUG-017    | Ao cadastrar uma conta a receber com status "Recebido" e escolher o Tipo de Pagamento "Dinheiro", o sistema abre a janela "Escolher Bandeira", que é usada para cartão. A lista de bandeiras vem vazia. Ao clicar em "Fechar", o Tipo de Pagamento volta para "Selecione", e sem tipo de pagamento o sistema não salva a conta. |
+
+| **Severidade do Bug** | **Prioridade de Correção** | **Status** |
+| :-------------------: | :------------------------: | :--------: |
+|         Alta          |            Alta            |   Aberto   |
+
+| **Passo a passo para simular o bug**                           |
+| -------------------------------------------------------------- |
+| 1. Acessar o menu "Contas a Receber" e clicar em "Nova Conta"  |
+| 2. Selecionar o cliente "Hendreu Teste" e informar o valor 50,00 |
+| 3. Manter o status "Recebido"                                  |
+| 4. Selecionar "Dinheiro" no campo Tipo de Pagamento            |
+| 5. Observar a janela "Escolher Bandeira"                       |
+
+|                        **Comportamento Esperado**                       |                        **Comportamento Obtido**                        |
+| :---------------------------------------------------------------------: | :--------------------------------------------------------------------: |
+| Pagamento em dinheiro não deve pedir bandeira de cartão, e a conta deve ser salva. | A janela "Escolher Bandeira" abre com a lista vazia e, ao fechar, o tipo de pagamento é apagado. Não é possível salvar a conta como recebida em dinheiro. |
+
+| **Ambiente**             |
+| ------------------------ |
+| Ambiente de testes.      |
+| Desktop com Windows 11.  |
+| Chrome 155.0.8059.85     |
+| SIFIT                    |
+
+| **Funcionalidade Afetada** |           **Caso de Teste Relacionado**            |
+| :------------------------: | :------------------------------------------------: |
+|      Contas a Receber      | C09-CT01: Cadastrar conta a receber com dados válidos |
+
+|                **Evidência(s)**               |
+| :-------------------------------------------: |
+| [Vídeo](https://jam.dev/c/21676c18-6d62-4959-aa27-99c1c41ab74a) (0:31 a 0:55) |
+
+---
+
+### 🐞 **Bug 18: Card "Total a Pagar" mostra 0 com conta pendente de R$ 200,00 na lista**
+
+| **ID**     | **Descrição**                                                                                                                                  |
+| ---------- | ---------------------------------------------------------------------------------------------------------------------------------------------- |
+| BUG-018    | Na tela de Contas a Pagar, com o filtro Status "Pendente", a lista mostra 2 contas pendentes (R$ 200,00 e R$ 0,00), mas os cards "Total a Pagar" e "Valor Pendente" exibem 0. |
+
+| **Severidade do Bug** | **Prioridade de Correção** | **Status** |
+| :-------------------: | :------------------------: | :--------: |
+|         Alta          |            Alta            |   Aberto   |
+
+| **Passo a passo para simular o bug**                           |
+| -------------------------------------------------------------- |
+| 1. Acessar o menu "Contas a Pagar"                             |
+| 2. Selecionar o Status "Pendente" e clicar em "Buscar"         |
+| 3. Somar a coluna "Valor Pagar" das contas listadas            |
+| 4. Comparar com os cards "Total a Pagar" e "Valor Pendente"    |
+
+|                        **Comportamento Esperado**                       |                        **Comportamento Obtido**                        |
+| :---------------------------------------------------------------------: | :--------------------------------------------------------------------: |
+| Os cards devem mostrar R$ 200,00, que é a soma das contas pendentes listadas. | Os cards "Total a Pagar" e "Valor Pendente" mostram 0, enquanto "Contas Listadas" mostra 2. |
+
+| **Ambiente**             |
+| ------------------------ |
+| Ambiente de testes.      |
+| Desktop com Windows 11.  |
+| Chrome 155.0.8059.85     |
+| SIFIT                    |
+
+| **Funcionalidade Afetada** |           **Caso de Teste Relacionado**            |
+| :------------------------: | :------------------------------------------------: |
+|       Contas a Pagar       | C09-CT03: Conferir total das contas a pagar pendentes |
+
+|                **Evidência(s)**               |
+| :-------------------------------------------: |
+| [Vídeo](https://jam.dev/c/3bdb4808-fb6f-452a-800f-50733c073b37) (0:45 a 0:50) |
