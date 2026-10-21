@@ -424,3 +424,80 @@
 |                **Evidência(s)**               |
 | :-------------------------------------------: |
 | [Captura de tela](https://jam.dev/c/06e32ae4-06b8-4d29-937c-d7fee97cbf6c) |
+
+---
+
+### 🐞 **Bug 12: Não é possível cadastrar objetivo de treino**
+
+| **ID**     | **Descrição**                                                                                                                                  |
+| ---------- | ---------------------------------------------------------------------------------------------------------------------------------------------- |
+| BUG-012    | Ao cadastrar um objetivo com o nome "Hipertrofia", o sistema exibe "Erro ao salvar objetivo" e nada é gravado. A tela de Objetivos Treino continua com "Nenhum objetivo cadastrado". Na consulta ao banco (DESCRIBE objetivos_treino), a coluna id não tem auto_increment nem valor padrão, o que pode ser a causa do erro. |
+
+| **Severidade do Bug** | **Prioridade de Correção** | **Status** |
+| :-------------------: | :------------------------: | :--------: |
+|         Alta          |            Alta            |   Aberto   |
+
+| **Passo a passo para simular o bug**                           |
+| -------------------------------------------------------------- |
+| 1. Acessar o menu "Objetivos Treino" |
+| 2. Clicar em "Novo Objetivo" |
+| 3. Preencher "Hipertrofia" no campo Nome |
+| 4. Clicar em "Salvar" |
+
+|                        **Comportamento Esperado**                       |                        **Comportamento Obtido**                        |
+| :---------------------------------------------------------------------: | :--------------------------------------------------------------------: |
+| O objetivo deve ser salvo e exibido na lista. | É exibido "Erro ao salvar objetivo" e a lista continua vazia. |
+
+| **Ambiente**             |
+| ------------------------ |
+| Ambiente de testes.      |
+| Desktop com Windows 11.  |
+| Chrome 155.0.8059.85     |
+| SIFIT                    |
+
+| **Funcionalidade Afetada** |           **Caso de Teste Relacionado**            |
+| :------------------------: | :------------------------------------------------: |
+|         Objetivos de Treino         | C17-CT01: Adicionar novo objetivo com dados válidos |
+
+|                **Evidência(s)**               |
+| :-------------------------------------------: |
+| [Vídeo](https://jam.dev/c/11966eaa-46d6-4084-9b42-2e2bcc6ee551) (0:28 a 0:35) |
+
+---
+
+### 🐞 **Bug 13: Não é possível criar ficha de treino porque a lista de objetivos vem vazia**
+
+| **ID**     | **Descrição**                                                                                                                                  |
+| ---------- | ---------------------------------------------------------------------------------------------------------------------------------------------- |
+| BUG-013    | Ao cadastrar uma ficha com aluno, personal e datas preenchidos, o sistema exibe apenas "Erro ao salvar Ficha". O campo Objetivo não tem nenhuma opção além de "Selecione", pois não há objetivos cadastrados e o cadastro de objetivos também falha (BUG-012). Assim, nenhuma ficha de treino pode ser criada. |
+
+| **Severidade do Bug** | **Prioridade de Correção** | **Status** |
+| :-------------------: | :------------------------: | :--------: |
+|         Alta          |            Alta            |   Aberto   |
+
+| **Passo a passo para simular o bug**                           |
+| -------------------------------------------------------------- |
+| 1. Acessar o menu "Ficha de Treino" e clicar em "Cadastrar Ficha" |
+| 2. Selecionar o aluno "Hendreu Teste", o personal e as datas |
+| 3. Abrir o campo Objetivo e verificar que não há opções |
+| 4. Clicar em "Criar Nova Ficha" |
+
+|                        **Comportamento Esperado**                       |                        **Comportamento Obtido**                        |
+| :---------------------------------------------------------------------: | :--------------------------------------------------------------------: |
+| A ficha deve ser criada ou o sistema deve informar que é preciso cadastrar um objetivo antes. | É exibido apenas "Erro ao salvar Ficha", sem indicar o motivo. |
+
+| **Ambiente**             |
+| ------------------------ |
+| Ambiente de testes.      |
+| Desktop com Windows 11.  |
+| Chrome 155.0.8059.85     |
+| SIFIT                    |
+
+| **Funcionalidade Afetada** |           **Caso de Teste Relacionado**            |
+| :------------------------: | :------------------------------------------------: |
+|         Fichas de Treino         | C07-CT01: Cadastrar ficha de treino com dados válidos |
+
+|                **Evidência(s)**               |
+| :-------------------------------------------: |
+| [Vídeo](https://jam.dev/c/27b40cdf-4229-4b0a-adb0-cecc0c053d8a) (0:31 a 0:33) |
+| [Vídeo](https://jam.dev/c/11966eaa-46d6-4084-9b42-2e2bcc6ee551) (0:12 a 0:13, listas de fichas e objetivos vazias) |
