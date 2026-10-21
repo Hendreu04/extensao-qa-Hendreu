@@ -501,3 +501,119 @@
 | :-------------------------------------------: |
 | [Vídeo](https://jam.dev/c/27b40cdf-4229-4b0a-adb0-cecc0c053d8a) (0:31 a 0:33) |
 | [Vídeo](https://jam.dev/c/11966eaa-46d6-4084-9b42-2e2bcc6ee551) (0:12 a 0:13, listas de fichas e objetivos vazias) |
+
+---
+
+### 🐞 **Bug 14: Sistema aceita turma com horário inicial igual ao horário final**
+
+| **ID**     | **Descrição**                                                                                                                                  |
+| ---------- | ---------------------------------------------------------------------------------------------------------------------------------------------- |
+| BUG-014    | Ao cadastrar a turma "Turma Hendreu" com Hora Inicial 08:00 e Hora Final 08:00, o sistema salva normalmente e a turma aparece na lista com o horário "08:00:00 - 08:00:00". |
+
+| **Severidade do Bug** | **Prioridade de Correção** | **Status** |
+| :-------------------: | :------------------------: | :--------: |
+|         Média         |           Média            |   Aberto   |
+
+| **Passo a passo para simular o bug**                           |
+| -------------------------------------------------------------- |
+| 1. Acessar o menu "Turmas" e clicar em "Cadastrar Turma" |
+| 2. Preencher nome, plano e dias da semana |
+| 3. Informar 08:00 em Hora Inicial e 08:00 em Hora Final |
+| 4. Clicar em "Salvar" |
+
+|                        **Comportamento Esperado**                       |                        **Comportamento Obtido**                        |
+| :---------------------------------------------------------------------: | :--------------------------------------------------------------------: |
+| O sistema deve impedir o cadastro e informar que a hora final deve ser maior que a inicial. | A turma é salva com horário "08:00:00 - 08:00:00". |
+
+| **Ambiente**             |
+| ------------------------ |
+| Ambiente de testes.      |
+| Desktop com Windows 11.  |
+| Chrome 155.0.8059.85     |
+| SIFIT                    |
+
+| **Funcionalidade Afetada** |           **Caso de Teste Relacionado**            |
+| :------------------------: | :------------------------------------------------: |
+|         Turmas         | C08-CT02: Cadastrar turma com horário inválido |
+
+|                **Evidência(s)**               |
+| :-------------------------------------------: |
+| [Vídeo](https://jam.dev/c/824d0d2e-0223-4c8e-b5c3-f4f7d4181fdc) (0:10 a 0:12 e 0:35 a 0:37) |
+
+---
+
+### 🐞 **Bug 15: Check-in confirmado no banco aparece como "Pendente" e não conta como presente**
+
+| **ID**     | **Descrição**                                                                                                                                  |
+| ---------- | ---------------------------------------------------------------------------------------------------------------------------------------------- |
+| BUG-015    | O check-in do cliente 413 (Hendreu Teste) está gravado na tabela checkins com status CONFIRMADO, mas a tela de Check-ins exibe o cliente com status "Pendente" e o card "Presentes agora" mostra 0. Ao fazer uma nova entrada rápida com o mesmo código, o campo é limpo, nenhum registro novo é gravado e nenhuma mensagem é exibida. O botão "Registrar entrada" da linha do cliente também não altera nada ao ser clicado. |
+
+| **Severidade do Bug** | **Prioridade de Correção** | **Status** |
+| :-------------------: | :------------------------: | :--------: |
+|         Alta         |           Alta            |   Aberto   |
+
+| **Passo a passo para simular o bug**                           |
+| -------------------------------------------------------------- |
+| 1. Acessar o menu "Check-in" |
+| 2. Digitar o código 413 em "Entrada rápida" e clicar em "Realizar check-in" |
+| 3. Observar o status do cliente na lista e o card "Presentes agora" |
+| 4. Clicar em "Registrar entrada" na linha do cliente |
+| 5. Consultar a tabela checkins no banco: SELECT * FROM checkins WHERE cliente_id = 413; |
+
+|                        **Comportamento Esperado**                       |                        **Comportamento Obtido**                        |
+| :---------------------------------------------------------------------: | :--------------------------------------------------------------------: |
+| O status da tela deve ser igual ao do banco e o cliente deve aparecer em "Presentes agora". Uma nova tentativa deve exibir uma mensagem (sucesso ou check-in já realizado). | A tela mostra "Pendente" e "Presentes agora (0)", enquanto o banco mostra CONFIRMADO. A nova tentativa não grava nada e não exibe mensagem. |
+
+| **Ambiente**             |
+| ------------------------ |
+| Ambiente de testes.      |
+| Desktop com Windows 11.  |
+| Chrome 155.0.8059.85     |
+| SIFIT                    |
+
+| **Funcionalidade Afetada** |           **Caso de Teste Relacionado**            |
+| :------------------------: | :------------------------------------------------: |
+|         Check-in         | C08-CT03: Realizar check-in de cliente |
+
+|                **Evidência(s)**               |
+| :-------------------------------------------: |
+| [Vídeo](https://jam.dev/c/824d0d2e-0223-4c8e-b5c3-f4f7d4181fdc) (0:40 a 0:48) |
+| [Vídeo](https://jam.dev/c/0f0778fe-246a-4fd1-bbca-2151b866fc2d) (0:04 a 0:10, botão "Registrar entrada" sem efeito) |
+| Consulta no banco: registro id 13 da tabela checkins com status CONFIRMADO |
+
+---
+
+### 🐞 **Bug 16: Horário de entrada do check-in exibido 3 horas adiantado**
+
+| **ID**     | **Descrição**                                                                                                                                  |
+| ---------- | ---------------------------------------------------------------------------------------------------------------------------------------------- |
+| BUG-016    | Na tela de Check-ins, o relógio do topo mostra 19:44, mas a entrada do cliente Hendreu Teste aparece às 22:43. No banco, o registro foi gravado como 2026-10-21 22:43:30. O sistema exibe o horário em UTC, sem converter para o horário de Brasília (UTC-3). |
+
+| **Severidade do Bug** | **Prioridade de Correção** | **Status** |
+| :-------------------: | :------------------------: | :--------: |
+|         Média         |           Média            |   Aberto   |
+
+| **Passo a passo para simular o bug**                           |
+| -------------------------------------------------------------- |
+| 1. Realizar o check-in de um cliente |
+| 2. Comparar o horário da coluna "Entrada" com o relógio no topo da tela de Check-ins |
+
+|                        **Comportamento Esperado**                       |                        **Comportamento Obtido**                        |
+| :---------------------------------------------------------------------: | :--------------------------------------------------------------------: |
+| O horário de entrada deve ser exibido no horário local (Brasília). | A entrada aparece 3 horas à frente do horário real. |
+
+| **Ambiente**             |
+| ------------------------ |
+| Ambiente de testes.      |
+| Desktop com Windows 11.  |
+| Chrome 155.0.8059.85     |
+| SIFIT                    |
+
+| **Funcionalidade Afetada** |           **Caso de Teste Relacionado**            |
+| :------------------------: | :------------------------------------------------: |
+|         Check-in         | C08-CT03: Realizar check-in de cliente |
+
+|                **Evidência(s)**               |
+| :-------------------------------------------: |
+| [Vídeo](https://jam.dev/c/824d0d2e-0223-4c8e-b5c3-f4f7d4181fdc) (0:40, entrada 22:43 com relógio 19:44) |
+| Consulta no banco: created_at 2026-10-21 22:43:30 |
