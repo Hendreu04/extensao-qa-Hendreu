@@ -694,3 +694,123 @@
 |                **Evidência(s)**               |
 | :-------------------------------------------: |
 | [Vídeo](https://jam.dev/c/3bdb4808-fb6f-452a-800f-50733c073b37) (0:45 a 0:50) |
+
+---
+
+### 🐞 **Bug 19: Mensagem genérica ao salvar matrícula com dia de vencimento anterior à data inicial**
+
+| **ID**     | **Descrição**                                                                                                                                  |
+| ---------- | ---------------------------------------------------------------------------------------------------------------------------------------------- |
+| BUG-019    | Ao salvar uma matrícula com Data Inicial 31/10/2026 e Dia Vencimento 01/10/2026, o sistema exibe "Não foi possível concluir – Erro ao Cadastrar com Assinatura". A matrícula não é gravada (confirmado no banco), mas a mensagem não informa qual campo está errado. Além disso, a Data Final digitada antes de escolher o plano é descartada sem aviso. |
+
+| **Severidade do Bug** | **Prioridade de Correção** | **Status** |
+| :-------------------: | :------------------------: | :--------: |
+|         Baixa         |           Média            |   Aberto   |
+
+| **Passo a passo para simular o bug**                           |
+| -------------------------------------------------------------- |
+| 1. Acessar "Matrículas" e clicar em "Cadastrar Matrícula"      |
+| 2. Informar Data Inicial 31/10/2026 e Data Final 01/10/2026    |
+| 3. Selecionar o cliente "Hendreu Teste", o plano e o tipo de pagamento "Dinheiro" |
+| 4. Informar 01/10/2026 em Dia Vencimento                       |
+| 5. Clicar em "Salvar"                                          |
+
+|                        **Comportamento Esperado**                       |                        **Comportamento Obtido**                        |
+| :---------------------------------------------------------------------: | :--------------------------------------------------------------------: |
+| O sistema deve informar que o vencimento não pode ser anterior à data inicial. | É exibido "Erro ao Cadastrar com Assinatura", sem indicar o problema. |
+
+| **Ambiente**             |
+| ------------------------ |
+| Ambiente de testes.      |
+| Desktop com Windows 11.  |
+| Chrome 155.0.8059.85     |
+| SIFIT                    |
+
+| **Funcionalidade Afetada** |           **Caso de Teste Relacionado**            |
+| :------------------------: | :------------------------------------------------: |
+|         Matrículas         | C04-CT03: Tentar cadastrar matrícula sem tipo de pagamento |
+
+|                **Evidência(s)**               |
+| :-------------------------------------------: |
+| [Vídeo](https://jam.dev/c/a8950630-7a17-4426-a570-4c9b4a76e827) (0:09 a 0:15 e 0:43 a 0:59) |
+| Consulta no banco: só a matrícula #238 existe para o cliente 413 |
+
+---
+
+### 🐞 **Bug 20: Relatório é gerado com data final anterior à data inicial**
+
+| **ID**     | **Descrição**                                                                                                                                  |
+| ---------- | ---------------------------------------------------------------------------------------------------------------------------------------------- |
+| BUG-020    | Ao gerar o relatório de Matrículas com Data Início 31/10/2026 e Data Fim 01/10/2026, o sistema não exibe mensagem de erro e baixa um PDF com "Data Inicial: 31/10/2026", "Data Final: 01/10/2026" e "Quantidade de registros: 0". |
+
+| **Severidade do Bug** | **Prioridade de Correção** | **Status** |
+| :-------------------: | :------------------------: | :--------: |
+|         Baixa         |           Média            |   Aberto   |
+
+| **Passo a passo para simular o bug**                           |
+| -------------------------------------------------------------- |
+| 1. Acessar o menu "Relatórios" |
+| 2. Selecionar o tipo "Matrículas" |
+| 3. Informar Data Início 31/10/2026 e Data Fim 01/10/2026 |
+| 4. Clicar em "Gerar Relatório" |
+| 5. Abrir o PDF baixado |
+
+|                        **Comportamento Esperado**                       |                        **Comportamento Obtido**                        |
+| :---------------------------------------------------------------------: | :--------------------------------------------------------------------: |
+| O sistema deve impedir a geração e informar que a data final deve ser maior que a inicial. | O PDF é gerado com o período invertido e 0 registros, sem aviso de período inválido. |
+
+| **Ambiente**             |
+| ------------------------ |
+| Ambiente de testes.      |
+| Desktop com Windows 11.  |
+| Chrome 155.0.8059.85     |
+| SIFIT                    |
+
+| **Funcionalidade Afetada** |           **Caso de Teste Relacionado**            |
+| :------------------------: | :------------------------------------------------: |
+|         Relatórios         | C10-CT02: Gerar relatório com período inválido |
+
+|                **Evidência(s)**               |
+| :-------------------------------------------: |
+| [Vídeo](https://jam.dev/c/be9e953b-120a-4b46-be9d-f5ce0f0e07fb) (0:04 a 0:11) |
+| [Vídeo](https://jam.dev/c/c0aad349-ea7d-48d8-9e2b-92eb157d216d) (0:04 a 0:07, PDF gerado) |
+
+---
+
+### 🐞 **Bug 21: Relatório de Clientes é baixado corrompido e não abre**
+
+| **ID**     | **Descrição**                                                                                                                                  |
+| ---------- | ---------------------------------------------------------------------------------------------------------------------------------------------- |
+| BUG-021    | Ao gerar o relatório de Clientes com o período 01/01/2026 a 31/10/2026, o arquivo "relatorio (2).pdf" é baixado com 0 bytes. Ao abrir, o Chrome exibe "Erro – Falha ao carregar documento PDF". A tela de Relatórios não informa que o arquivo foi gerado com erro. |
+
+| **Severidade do Bug** | **Prioridade de Correção** | **Status** |
+| :-------------------: | :------------------------: | :--------: |
+|         Alta         |           Alta            |   Aberto   |
+
+| **Passo a passo para simular o bug**                           |
+| -------------------------------------------------------------- |
+| 1. Acessar o menu "Relatórios" |
+| 2. Selecionar o tipo "Clientes" |
+| 3. Informar Data Início 01/01/2026 e Data Fim 31/10/2026 |
+| 4. Clicar em "Gerar Relatório" |
+| 5. Abrir o PDF baixado |
+
+|                        **Comportamento Esperado**                       |                        **Comportamento Obtido**                        |
+| :---------------------------------------------------------------------: | :--------------------------------------------------------------------: |
+| O PDF deve abrir com a lista de clientes cadastrados no período, incluindo o "Hendreu Teste". | O arquivo baixado está vazio (0 bytes) e não abre. |
+
+| **Ambiente**             |
+| ------------------------ |
+| Ambiente de testes.      |
+| Desktop com Windows 11.  |
+| Chrome 155.0.8059.85     |
+| SIFIT                    |
+
+| **Funcionalidade Afetada** |           **Caso de Teste Relacionado**            |
+| :------------------------: | :------------------------------------------------: |
+|         Relatórios         | C10-CT01: Gerar relatório de clientes |
+
+|                **Evidência(s)**               |
+| :-------------------------------------------: |
+| [Vídeo](https://jam.dev/c/be9e953b-120a-4b46-be9d-f5ce0f0e07fb) (0:58 a 1:04) |
+| [Vídeo](https://jam.dev/c/c0aad349-ea7d-48d8-9e2b-92eb157d216d) (0:02 e 0:19 a 0:22, arquivo com 0 bytes e erro ao abrir) |
