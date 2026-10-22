@@ -1157,3 +1157,42 @@
 |                **Evidência(s)**               |
 | :-------------------------------------------: |
 | [Vídeo](https://jam.dev/c/738864f2-1b23-4d4a-8edb-c5cb52a5e503) (0:03 a 0:10 e 0:17) |
+
+---
+
+### 🐞 **Bug 31: Não é possível criar modelo de ficha de treino**
+
+| **ID**     | **Descrição**                                                                                                                                  |
+| ---------- | ---------------------------------------------------------------------------------------------------------------------------------------------- |
+| BUG-031    | Ao abrir a tela Modelos de Ficha, o sistema exibe "Falha de conexão – Não foi possível conectar ao servidor". Ao criar o modelo "Modelo Hendreu", aparece "Erro ao salvar modelo" ou a janela fecha sem salvar, e a lista continua vazia. O Jam registra respostas com erro 500 do servidor. Na consulta ao banco não existe nenhuma tabela de modelo de ficha de treino (SHOW TABLES LIKE '%modelo%' e '%ficha%'), o que indica a causa provável. |
+
+| **Severidade do Bug** | **Prioridade de Correção** | **Status** |
+| :-------------------: | :------------------------: | :--------: |
+|         Alta          |            Alta            |   Aberto   |
+
+| **Passo a passo para simular o bug**                           |
+| -------------------------------------------------------------- |
+| 1. Acessar o menu "Modelo Ficha"                               |
+| 2. Clicar no botão "+" para criar um modelo                    |
+| 3. Preencher "Modelo Hendreu" no Nome do Modelo e selecionar o personal "Santhago" |
+| 4. Clicar em "Criar Modelo"                                    |
+
+|                        **Comportamento Esperado**                       |                        **Comportamento Obtido**                        |
+| :---------------------------------------------------------------------: | :--------------------------------------------------------------------: |
+| O modelo deve ser salvo e exibido na lista de modelos.                  | É exibido "Erro ao salvar modelo" ou a janela fecha, e nenhum modelo é cadastrado. |
+
+| **Ambiente**             |
+| ------------------------ |
+| Ambiente de testes.      |
+| Desktop com Windows 11.  |
+| Chrome 155.0.8059.85     |
+| SIFIT                    |
+
+| **Funcionalidade Afetada** |           **Caso de Teste Relacionado**            |
+| :------------------------: | :------------------------------------------------: |
+|      Modelos de Ficha      | C18-CT02: Pesquisar modelo de ficha por título     |
+
+|                **Evidência(s)**               |
+| :-------------------------------------------: |
+| [Vídeo](https://jam.dev/c/42cd2169-d05d-4486-9ca0-74e544443ed1) (0:06, 0:27 e 0:31) |
+| Consulta no banco: SHOW TABLES LIKE '%ficha%' retorna apenas exercicio_ficha, ficha_anamnese, ficha_treino, objetivo_ficha e pergunta_ficha |
