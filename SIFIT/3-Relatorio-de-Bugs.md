@@ -127,7 +127,7 @@
 
 | **ID**     | **Descrição**                                                                                                                                  |
 | ---------- | ---------------------------------------------------------------------------------------------------------------------------------------------- |
-| BUG-004    | Ao pesquisar um cliente pelo nome, a lista mostra 1 resultado, mas a paginação continua exibindo as páginas 1, 2 e 3 e o botão "Próxima". |
+| BUG-004    | Ao pesquisar um cliente pelo nome, a lista mostra 1 resultado, mas a paginação continua exibindo as páginas 1, 2 e 3 e o botão "Próxima". O mesmo acontece na busca de Colaboradores. |
 
 | **Severidade do Bug** | **Prioridade de Correção** | **Status** |
 | :-------------------: | :------------------------: | :--------: |
@@ -158,6 +158,7 @@
 |                **Evidência(s)**               |
 | :-------------------------------------------: |
 | [Vídeo](https://jam.dev/c/7e8be00d-94a9-4a63-93e8-88c9c38faab4) (1:01) |
+| [Vídeo](https://jam.dev/c/64d30fb2-224f-4f30-848f-cb7adca31a22) (1:13, o mesmo ocorre em Colaboradores: 1 resultado e páginas 1 e 2) |
 
 ---
 
@@ -814,3 +815,119 @@
 | :-------------------------------------------: |
 | [Vídeo](https://jam.dev/c/be9e953b-120a-4b46-be9d-f5ce0f0e07fb) (0:58 a 1:04) |
 | [Vídeo](https://jam.dev/c/c0aad349-ea7d-48d8-9e2b-92eb157d216d) (0:02 e 0:19 a 0:22, arquivo com 0 bytes e erro ao abrir) |
+
+---
+
+### 🐞 **Bug 22: "Erro no servidor" ao salvar colaborador com campos obrigatórios vazios**
+
+| **ID**     | **Descrição**                                                                                                                                  |
+| ---------- | ---------------------------------------------------------------------------------------------------------------------------------------------- |
+| BUG-022    | Ao clicar em "Salvar" no cadastro de colaborador com o Nome em branco, o sistema exibe "Erro no servidor – Erro interno inesperado." em vez de indicar o campo obrigatório. O mesmo erro aparece com o Nome preenchido e os demais campos (Status, Sexo, Data de Nascimento) vazios. |
+
+| **Severidade do Bug** | **Prioridade de Correção** | **Status** |
+| :-------------------: | :------------------------: | :--------: |
+|         Média         |           Média            |   Aberto   |
+
+| **Passo a passo para simular o bug**                           |
+| -------------------------------------------------------------- |
+| 1. Acessar o menu "Colaboradores" e clicar em "Novo Colaborador" |
+| 2. Deixar o campo Nome em branco |
+| 3. Clicar em "Salvar" |
+| 4. Preencher apenas o Nome e clicar em "Salvar" novamente |
+
+|                        **Comportamento Esperado**                       |                        **Comportamento Obtido**                        |
+| :---------------------------------------------------------------------: | :--------------------------------------------------------------------: |
+| O sistema deve indicar quais campos obrigatórios não foram preenchidos, sem chegar a gerar erro no servidor. | É exibido "Erro no servidor – Erro interno inesperado." nas duas tentativas. |
+
+| **Ambiente**             |
+| ------------------------ |
+| Ambiente de testes.      |
+| Desktop com Windows 11.  |
+| Chrome 155.0.8059.85     |
+| SIFIT                    |
+
+| **Funcionalidade Afetada** |           **Caso de Teste Relacionado**            |
+| :------------------------: | :------------------------------------------------: |
+|         Colaboradores         | C11-CT02: Tentar adicionar colaborador sem nome |
+
+|                **Evidência(s)**               |
+| :-------------------------------------------: |
+| [Vídeo](https://jam.dev/c/64d30fb2-224f-4f30-848f-cb7adca31a22) (0:06 a 0:09 e 0:21 a 0:22) |
+
+---
+
+### 🐞 **Bug 23: Cadastro de colaborador aceita CPF inválido**
+
+| **ID**     | **Descrição**                                                                                                                                  |
+| ---------- | ---------------------------------------------------------------------------------------------------------------------------------------------- |
+| BUG-023    | O colaborador "Hendreu Colaborador" foi salvo com o CPF 123.456.789-88, que tem os dígitos verificadores errados (o correto para 123.456.789 seria -09). O sistema não validou o CPF. |
+
+| **Severidade do Bug** | **Prioridade de Correção** | **Status** |
+| :-------------------: | :------------------------: | :--------: |
+|         Média         |           Média            |   Aberto   |
+
+| **Passo a passo para simular o bug**                           |
+| -------------------------------------------------------------- |
+| 1. Acessar "Colaboradores" e clicar em "Novo Colaborador" |
+| 2. Preencher Nome, Status, Sexo e Data de Nascimento |
+| 3. Informar o CPF 123.456.789-88 |
+| 4. Clicar em "Salvar" |
+
+|                        **Comportamento Esperado**                       |                        **Comportamento Obtido**                        |
+| :---------------------------------------------------------------------: | :--------------------------------------------------------------------: |
+| O sistema deve recusar o CPF e informar que ele é inválido. | O colaborador é salvo normalmente com o CPF inválido. |
+
+| **Ambiente**             |
+| ------------------------ |
+| Ambiente de testes.      |
+| Desktop com Windows 11.  |
+| Chrome 155.0.8059.85     |
+| SIFIT                    |
+
+| **Funcionalidade Afetada** |           **Caso de Teste Relacionado**            |
+| :------------------------: | :------------------------------------------------: |
+|         Colaboradores         | C11-CT01: Adicionar novo colaborador com dados válidos |
+
+|                **Evidência(s)**               |
+| :-------------------------------------------: |
+| [Vídeo](https://jam.dev/c/64d30fb2-224f-4f30-848f-cb7adca31a22) (0:52 a 1:00 e 1:13) |
+
+---
+
+### 🐞 **Bug 24: Sistema permite cadastrar colaborador com login já usado por outro colaborador**
+
+| **ID**     | **Descrição**                                                                                                                                  |
+| ---------- | ---------------------------------------------------------------------------------------------------------------------------------------------- |
+| BUG-024    | Ao cadastrar o colaborador "Hendreu Colaborador" (#57), o campo Login foi salvo como "marcelo_zandonadi", que já pertence ao colaborador #11. Na tabela login do banco existem agora dois registros com o mesmo login (id 118 do funcionário 11 e id 180 do funcionário 57). O sistema não avisou que o login já existe. |
+
+| **Severidade do Bug** | **Prioridade de Correção** | **Status** |
+| :-------------------: | :------------------------: | :--------: |
+|         Alta          |            Alta            |   Aberto   |
+
+| **Passo a passo para simular o bug**                           |
+| -------------------------------------------------------------- |
+| 1. Acessar "Colaboradores" e clicar em "Novo Colaborador"      |
+| 2. Preencher os dados obrigatórios                             |
+| 3. Em "Cadastro de Login", informar um login que já existe (ex.: marcelo_zandonadi) e uma senha |
+| 4. Clicar em "Salvar"                                          |
+| 5. Consultar no banco: SELECT id, funcionario_id, login FROM login WHERE login = 'marcelo_zandonadi'; |
+
+|                        **Comportamento Esperado**                       |                        **Comportamento Obtido**                        |
+| :---------------------------------------------------------------------: | :--------------------------------------------------------------------: |
+| O sistema deve recusar o cadastro e informar que o login já está em uso. | O colaborador é salvo e o banco passa a ter dois logins iguais para colaboradores diferentes. |
+
+| **Ambiente**             |
+| ------------------------ |
+| Ambiente de testes.      |
+| Desktop com Windows 11.  |
+| Chrome 155.0.8059.85     |
+| SIFIT                    |
+
+| **Funcionalidade Afetada** |           **Caso de Teste Relacionado**            |
+| :------------------------: | :------------------------------------------------: |
+|       Colaboradores        | C11-CT01: Adicionar novo colaborador com dados válidos |
+
+|                **Evidência(s)**               |
+| :-------------------------------------------: |
+| [Vídeo](https://jam.dev/c/64d30fb2-224f-4f30-848f-cb7adca31a22) (0:11 a 1:00, campo Login com "marcelo_zandonadi" ao salvar) |
+| Consulta no banco: tabela login com os registros 118 (funcionário 11) e 180 (funcionário 57), ambos "marcelo_zandonadi" |
