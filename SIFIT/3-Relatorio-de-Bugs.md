@@ -931,3 +931,78 @@
 | :-------------------------------------------: |
 | [Vídeo](https://jam.dev/c/64d30fb2-224f-4f30-848f-cb7adca31a22) (0:11 a 1:00, campo Login com "marcelo_zandonadi" ao salvar) |
 | Consulta no banco: tabela login com os registros 118 (funcionário 11) e 180 (funcionário 57), ambos "marcelo_zandonadi" |
+
+---
+
+### 🐞 **Bug 25: Erro genérico ao salvar fornecedor preenchendo apenas o campo obrigatório**
+
+| **ID**     | **Descrição**                                                                                                                                  |
+| ---------- | ---------------------------------------------------------------------------------------------------------------------------------------------- |
+| BUG-025    | No cadastro de fornecedor, apenas o campo Nome está marcado como obrigatório (*). Ao salvar com o Nome "Fornecedor Hendreu" preenchido e os demais campos vazios, o sistema exibe apenas "Erro ao salvar fornecedor", sem indicar qual informação está faltando. Depois de preencher CNPJ e endereço, o cadastro é salvo normalmente. |
+
+| **Severidade do Bug** | **Prioridade de Correção** | **Status** |
+| :-------------------: | :------------------------: | :--------: |
+|         Média         |           Média            |   Aberto   |
+
+| **Passo a passo para simular o bug**                           |
+| -------------------------------------------------------------- |
+| 1. Acessar o menu "Fornecedores" e clicar em "Novo Fornecedor" |
+| 2. Preencher apenas o campo Nome |
+| 3. Clicar em "Salvar" |
+
+|                        **Comportamento Esperado**                       |                        **Comportamento Obtido**                        |
+| :---------------------------------------------------------------------: | :--------------------------------------------------------------------: |
+| O fornecedor deve ser salvo, ou o sistema deve marcar como obrigatórios e indicar os campos que faltam. | É exibido "Erro ao salvar fornecedor", sem indicar o campo com problema. |
+
+| **Ambiente**             |
+| ------------------------ |
+| Ambiente de testes.      |
+| Desktop com Windows 11.  |
+| Chrome 155.0.8059.85     |
+| SIFIT                    |
+
+| **Funcionalidade Afetada** |           **Caso de Teste Relacionado**            |
+| :------------------------: | :------------------------------------------------: |
+|         Fornecedores         | C13-CT01: Adicionar novo fornecedor com dados válidos |
+
+|                **Evidência(s)**               |
+| :-------------------------------------------: |
+| [Vídeo](https://jam.dev/c/c76b43da-ac66-4235-9348-40a66add58cd) (0:14 a 0:17) |
+
+---
+
+### 🐞 **Bug 26: Cadastro de fornecedor aceita CNPJ inválido**
+
+| **ID**     | **Descrição**                                                                                                                                  |
+| ---------- | ---------------------------------------------------------------------------------------------------------------------------------------------- |
+| BUG-026    | O fornecedor "Fornecedor Hendreu" (#415) foi salvo com o CNPJ 22.456.325/6622-56, que tem os dígitos verificadores errados (o correto para 22.456.325/6622 seria -59). O sistema não validou o CNPJ. |
+
+| **Severidade do Bug** | **Prioridade de Correção** | **Status** |
+| :-------------------: | :------------------------: | :--------: |
+|         Média         |           Média            |   Aberto   |
+
+| **Passo a passo para simular o bug**                           |
+| -------------------------------------------------------------- |
+| 1. Acessar "Fornecedores" e clicar em "Novo Fornecedor" |
+| 2. Preencher o Nome e o CNPJ 22.456.325/6622-56 |
+| 3. Preencher o endereço |
+| 4. Clicar em "Salvar" |
+
+|                        **Comportamento Esperado**                       |                        **Comportamento Obtido**                        |
+| :---------------------------------------------------------------------: | :--------------------------------------------------------------------: |
+| O sistema deve recusar o CNPJ e informar que ele é inválido. | O fornecedor é salvo normalmente com o CNPJ inválido. |
+
+| **Ambiente**             |
+| ------------------------ |
+| Ambiente de testes.      |
+| Desktop com Windows 11.  |
+| Chrome 155.0.8059.85     |
+| SIFIT                    |
+
+| **Funcionalidade Afetada** |           **Caso de Teste Relacionado**            |
+| :------------------------: | :------------------------------------------------: |
+|         Fornecedores         | C13-CT01: Adicionar novo fornecedor com dados válidos |
+
+|                **Evidência(s)**               |
+| :-------------------------------------------: |
+| [Vídeo](https://jam.dev/c/c76b43da-ac66-4235-9348-40a66add58cd) (0:22 a 0:26 e 0:50 a 1:06) |
