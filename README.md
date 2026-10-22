@@ -33,7 +33,7 @@ A estrutura está organizada por pastas, cada uma representando um sistema/teste
 
 - ✅ Análise de requisitos
 - ✅ Plano de testes
-- ⬜ Cenários e casos de teste
+- ✅ Cenários e casos de teste
 - ⬜ Execução dos testes e evidências
 - ⬜ Relatório de bugs
 - ⬜ Relatório final
