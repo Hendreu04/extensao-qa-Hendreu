@@ -1006,3 +1006,80 @@
 |                **Evidência(s)**               |
 | :-------------------------------------------: |
 | [Vídeo](https://jam.dev/c/c76b43da-ac66-4235-9348-40a66add58cd) (0:22 a 0:26 e 0:50 a 1:06) |
+
+---
+
+### 🐞 **Bug 27: Produto do tipo "Venda" é salvo sem preço**
+
+| **ID**     | **Descrição**                                                                                                                                  |
+| ---------- | ---------------------------------------------------------------------------------------------------------------------------------------------- |
+| BUG-027    | O produto "Garrafa Hendreu" (#9), do tipo "Venda", foi salvo com o campo Preço vazio. Na lista, a coluna Valor/Pontos aparece sem valor, e o produto é contado no card "Para venda". |
+
+| **Severidade do Bug** | **Prioridade de Correção** | **Status** |
+| :-------------------: | :------------------------: | :--------: |
+|         Média         |           Média            |   Aberto   |
+
+| **Passo a passo para simular o bug**                           |
+| -------------------------------------------------------------- |
+| 1. Acessar o menu "Produtos" e clicar em "Novo"                |
+| 2. Preencher o Nome "Garrafa Hendreu" e manter o Tipo "Venda"  |
+| 3. Deixar o campo Preço em branco                              |
+| 4. Clicar em "Salvar"                                          |
+
+|                        **Comportamento Esperado**                       |                        **Comportamento Obtido**                        |
+| :---------------------------------------------------------------------: | :--------------------------------------------------------------------: |
+| O sistema deve exigir o preço para produtos do tipo Venda.              | O produto é salvo sem preço e aparece na lista como disponível para venda. |
+
+| **Ambiente**             |
+| ------------------------ |
+| Ambiente de testes.      |
+| Desktop com Windows 11.  |
+| Chrome 155.0.8059.85     |
+| SIFIT                    |
+
+| **Funcionalidade Afetada** |           **Caso de Teste Relacionado**            |
+| :------------------------: | :------------------------------------------------: |
+|          Produtos          | C15-CT01: Adicionar novo produto com dados válidos |
+
+|                **Evidência(s)**               |
+| :-------------------------------------------: |
+| [Vídeo](https://jam.dev/c/52b224b2-eb8f-40bf-a669-3f096c2decdd) (0:12 a 0:19) |
+
+---
+
+### 🐞 **Bug 28: Sistema permite cadastrar produto sem nome**
+
+| **ID**     | **Descrição**                                                                                                                                  |
+| ---------- | ---------------------------------------------------------------------------------------------------------------------------------------------- |
+| BUG-028    | Ao salvar um produto com o campo Nome em branco, o sistema não exibe mensagem de erro e o produto é cadastrado. Na lista aparecem produtos sem nome e sem preço (#7, #8, #10 e #11), todos como "Venda" e "Ativo", e eles são contados nos cards "Total de produtos" e "Para venda". |
+
+| **Severidade do Bug** | **Prioridade de Correção** | **Status** |
+| :-------------------: | :------------------------: | :--------: |
+|         Média         |            Alta            |   Aberto   |
+
+| **Passo a passo para simular o bug**                           |
+| -------------------------------------------------------------- |
+| 1. Acessar o menu "Produtos" e clicar em "Novo"                |
+| 2. Deixar o campo Nome em branco                               |
+| 3. Clicar em "Salvar"                                          |
+| 4. Observar a lista de produtos                                |
+
+|                        **Comportamento Esperado**                       |                        **Comportamento Obtido**                        |
+| :---------------------------------------------------------------------: | :--------------------------------------------------------------------: |
+| O sistema deve impedir o cadastro e exibir uma mensagem de erro no campo Nome. | O produto é salvo sem nome e aparece na lista como ativo e disponível para venda. |
+
+| **Ambiente**             |
+| ------------------------ |
+| Ambiente de testes.      |
+| Desktop com Windows 11.  |
+| Chrome 155.0.8059.85     |
+| SIFIT                    |
+
+| **Funcionalidade Afetada** |           **Caso de Teste Relacionado**            |
+| :------------------------: | :------------------------------------------------: |
+|          Produtos          | C15-CT02: Tentar adicionar produto sem nome        |
+
+|                **Evidência(s)**               |
+| :-------------------------------------------: |
+| [Vídeo](https://jam.dev/c/f236c5ea-20d1-4ab5-9880-f846f4b57fe9) |
+| [Vídeo](https://jam.dev/c/52b224b2-eb8f-40bf-a669-3f096c2decdd) (0:03, produtos #7 e #8 sem nome na lista) |
