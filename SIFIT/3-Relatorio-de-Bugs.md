@@ -1083,3 +1083,77 @@
 | :-------------------------------------------: |
 | [Vídeo](https://jam.dev/c/f236c5ea-20d1-4ab5-9880-f846f4b57fe9) |
 | [Vídeo](https://jam.dev/c/52b224b2-eb8f-40bf-a669-3f096c2decdd) (0:03, produtos #7 e #8 sem nome na lista) |
+
+---
+
+### 🐞 **Bug 29: Total de grupos musculares não bate com a soma por tipo de membro**
+
+| **ID**     | **Descrição**                                                                                                                                  |
+| ---------- | ---------------------------------------------------------------------------------------------------------------------------------------------- |
+| BUG-029    | O card "Grupos cadastrados" mostra 12, mas a soma dos cards Superiores (7), Inferiores (2) e Aeróbio (1) é 10. Na lista existe o grupo #8 "SAA" sem tipo de membro (exibido como "-"), o que indica que o sistema permite salvar grupo sem tipo e não o conta em nenhum card. |
+
+| **Severidade do Bug** | **Prioridade de Correção** | **Status** |
+| :-------------------: | :------------------------: | :--------: |
+|         Média         |           Média            |   Aberto   |
+
+| **Passo a passo para simular o bug**                           |
+| -------------------------------------------------------------- |
+| 1. Acessar o menu "Grupos Musculares" |
+| 2. Somar os cards Superiores, Inferiores e Aeróbio |
+| 3. Comparar com o card "Grupos cadastrados" |
+| 4. Observar a coluna Tipo Membro do grupo #8 |
+
+|                        **Comportamento Esperado**                       |                        **Comportamento Obtido**                        |
+| :---------------------------------------------------------------------: | :--------------------------------------------------------------------: |
+| O total deve ser igual à soma dos tipos, e todo grupo deve ter um tipo de membro. | O total é 12 e a soma é 10. O grupo #8 aparece sem tipo de membro. |
+
+| **Ambiente**             |
+| ------------------------ |
+| Ambiente de testes.      |
+| Desktop com Windows 11.  |
+| Chrome 155.0.8059.85     |
+| SIFIT                    |
+
+| **Funcionalidade Afetada** |           **Caso de Teste Relacionado**            |
+| :------------------------: | :------------------------------------------------: |
+|         Grupos Musculares         | C16-CT03: Verificar total de grupos cadastrados |
+
+|                **Evidência(s)**               |
+| :-------------------------------------------: |
+| [Vídeo](https://jam.dev/c/738864f2-1b23-4d4a-8edb-c5cb52a5e503) (0:03 a 0:10) |
+
+---
+
+### 🐞 **Bug 30: Imagens dos grupos musculares aparecem quebradas**
+
+| **ID**     | **Descrição**                                                                                                                                  |
+| ---------- | ---------------------------------------------------------------------------------------------------------------------------------------------- |
+| BUG-030    | Na lista de Grupos Musculares, os grupos Bicpes, Pernas, Teste 2, Cielo, Peitoral e Abdomen exibem o ícone de imagem quebrada na coluna Imagem. Os grupos sem imagem exibem corretamente o ícone padrão. |
+
+| **Severidade do Bug** | **Prioridade de Correção** | **Status** |
+| :-------------------: | :------------------------: | :--------: |
+|         Baixa         |           Baixa            |   Aberto   |
+
+| **Passo a passo para simular o bug**                           |
+| -------------------------------------------------------------- |
+| 1. Acessar o menu "Grupos Musculares" |
+| 2. Observar a coluna Imagem da lista |
+
+|                        **Comportamento Esperado**                       |                        **Comportamento Obtido**                        |
+| :---------------------------------------------------------------------: | :--------------------------------------------------------------------: |
+| A imagem cadastrada deve ser exibida, ou o ícone padrão quando não houver imagem. | É exibido o ícone de imagem quebrada. |
+
+| **Ambiente**             |
+| ------------------------ |
+| Ambiente de testes.      |
+| Desktop com Windows 11.  |
+| Chrome 155.0.8059.85     |
+| SIFIT                    |
+
+| **Funcionalidade Afetada** |           **Caso de Teste Relacionado**            |
+| :------------------------: | :------------------------------------------------: |
+|         Grupos Musculares         | C16-CT01: Visualizar lista de grupos musculares |
+
+|                **Evidência(s)**               |
+| :-------------------------------------------: |
+| [Vídeo](https://jam.dev/c/738864f2-1b23-4d4a-8edb-c5cb52a5e503) (0:03 a 0:10 e 0:17) |
