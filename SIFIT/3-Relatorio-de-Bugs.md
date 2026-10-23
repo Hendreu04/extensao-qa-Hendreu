@@ -1958,3 +1958,262 @@
 |                **Evidência(s)**               |
 | :-------------------------------------------: |
 | [Vídeo](https://jam.dev/c/f3ac1ddf-61d0-4eae-bf87-ecc0602b5dd2) (0:09 a 0:23) |
+
+---
+
+### 🐞 **Bug 52: Resultados da Inteligência apontam 42 inadimplentes, mas a Página Inicial mostra R$ 0,00 em aberto**
+
+| **ID**     | **Descrição**                                                                                                                                  |
+| ---------- | ---------------------------------------------------------------------------------------------------------------------------------------------- |
+| BUG-052    | Na tela Resultados da Inteligência, o card "Alunos inadimplentes monitorados" mostra 42 e o painel Inteligência Sifit informa "42 aluno(s) inadimplente(s) sendo monitorado(s)". Na Página Inicial, no mesmo momento, o card mostra "R$ 0,00 em aberto" e o "Total em aberto" das mensalidades pendentes também é R$ 0,00. |
+
+| **Severidade do Bug** | **Prioridade de Correção** | **Status** |
+| :-------------------: | :------------------------: | :--------: |
+|         Alta         |           Alta            |   Aberto   |
+
+| **Passo a passo para simular o bug**                           |
+| -------------------------------------------------------------- |
+| 1. Acessar o menu "Resultados IA" e observar o card "Alunos inadimplentes monitorados" |
+| 2. Acessar a "Página Inicial" e observar o card "em aberto" e o quadro "Mensalidades pendentes" |
+
+|                        **Comportamento Esperado**                       |                        **Comportamento Obtido**                        |
+| :---------------------------------------------------------------------: | :--------------------------------------------------------------------: |
+| As duas telas devem apresentar informações coerentes sobre a inadimplência. | A inteligência aponta 42 inadimplentes enquanto a Página Inicial mostra R$ 0,00 em aberto. |
+
+| **Ambiente**             |
+| ------------------------ |
+| Ambiente de testes.      |
+| Desktop com Windows 11.  |
+| Chrome 155.0.8059.85     |
+| SIFIT                    |
+
+| **Funcionalidade Afetada** |           **Caso de Teste Relacionado**            |
+| :------------------------: | :------------------------------------------------: |
+|         Resultados IA / Página Inicial         | C35-CT03: Verificar quantidade de inadimplentes |
+
+|                **Evidência(s)**               |
+| :-------------------------------------------: |
+| [Vídeo](https://jam.dev/c/3b7b3ec0-bd1f-43eb-99f3-72fa107f4b3f) (0:01, 0:25 e 0:27 a 0:31) |
+
+---
+
+### 🐞 **Bug 53: Filtro "Hoje" dos Resultados da Inteligência não atualiza todos os cards**
+
+| **ID**     | **Descrição**                                                                                                                                  |
+| ---------- | ---------------------------------------------------------------------------------------------------------------------------------------------- |
+| BUG-053    | Ao selecionar o período "Hoje", os cards de automações, relatórios, aniversariantes e avaliações vão a 0 e o histórico mostra "Ainda não há registros no período", mas os cards "Alunos em risco identificados" (1) e "Alunos inadimplentes monitorados" (42) e o painel Inteligência Sifit (7 alunos em risco) continuam iguais aos dos outros períodos. |
+
+| **Severidade do Bug** | **Prioridade de Correção** | **Status** |
+| :-------------------: | :------------------------: | :--------: |
+|         Baixa         |           Baixa            |   Aberto   |
+
+| **Passo a passo para simular o bug**                           |
+| -------------------------------------------------------------- |
+| 1. Acessar o menu "Resultados IA" |
+| 2. Clicar em "Hoje" |
+| 3. Comparar os cards com os de "Últimos 7 dias" e "Últimos 30 dias" |
+
+|                        **Comportamento Esperado**                       |                        **Comportamento Obtido**                        |
+| :---------------------------------------------------------------------: | :--------------------------------------------------------------------: |
+| Todos os cards devem respeitar o período selecionado, ou indicar que não dependem dele. | Parte dos cards zera e parte continua igual, mesmo sem registros no período. |
+
+| **Ambiente**             |
+| ------------------------ |
+| Ambiente de testes.      |
+| Desktop com Windows 11.  |
+| Chrome 155.0.8059.85     |
+| SIFIT                    |
+
+| **Funcionalidade Afetada** |           **Caso de Teste Relacionado**            |
+| :------------------------: | :------------------------------------------------: |
+|         Resultados IA         | C35-CT02: Filtrar resultados por período |
+
+|                **Evidência(s)**               |
+| :-------------------------------------------: |
+| [Vídeo](https://jam.dev/c/3b7b3ec0-bd1f-43eb-99f3-72fa107f4b3f) (0:08 a 0:10) |
+
+---
+
+### 🐞 **Bug 54: Campo "Dias para contar cliente como ausente" aceita valor negativo**
+
+| **ID**     | **Descrição**                                                                                                                                  |
+| ---------- | ---------------------------------------------------------------------------------------------------------------------------------------------- |
+| BUG-054    | Na aba Home das Configurações, o campo "Dias para contar cliente como ausente" está com o valor -120 e aceita ser salvo com -60. Um número negativo de dias não faz sentido para essa regra e pode explicar a divergência de clientes ausentes entre telas (BUG-002). |
+
+| **Severidade do Bug** | **Prioridade de Correção** | **Status** |
+| :-------------------: | :------------------------: | :--------: |
+|         Média         |           Média            |   Aberto   |
+
+| **Passo a passo para simular o bug**                           |
+| -------------------------------------------------------------- |
+| 1. Acessar o menu "Configurações", aba "Home" |
+| 2. Observar o campo "Dias para contar cliente como ausente" |
+| 3. Informar -60 e clicar em "Salvar Configurações" |
+
+|                        **Comportamento Esperado**                       |                        **Comportamento Obtido**                        |
+| :---------------------------------------------------------------------: | :--------------------------------------------------------------------: |
+| O campo deve aceitar apenas números positivos e recusar valores negativos. | O valor -120 está cadastrado e o sistema salva -60 sem aviso. |
+
+| **Ambiente**             |
+| ------------------------ |
+| Ambiente de testes.      |
+| Desktop com Windows 11.  |
+| Chrome 155.0.8059.85     |
+| SIFIT                    |
+
+| **Funcionalidade Afetada** |           **Caso de Teste Relacionado**            |
+| :------------------------: | :------------------------------------------------: |
+|         Configurações         | C37-CT03: Cancelar alteração de configuração |
+
+|                **Evidência(s)**               |
+| :-------------------------------------------: |
+| [Vídeo](https://jam.dev/c/9c52920c-240b-49e1-8cac-e183cbf67b26) (0:01 e 0:45 a 0:53 (o valor original -120 foi restaurado aos 0:57)) |
+
+---
+
+### 🐞 **Bug 55: Senha do aparelho biométrico é exibida em texto aberto nas Configurações**
+
+| **ID**     | **Descrição**                                                                                                                                  |
+| ---------- | ---------------------------------------------------------------------------------------------------------------------------------------------- |
+| BUG-055    | Na aba Biometria das Configurações, os campos Login e Senha do aparelho de catraca (Control ID) aparecem com o conteúdo visível, sem máscara. A senha visível é a padrão de fábrica. Qualquer usuário com acesso à tela pode ver a credencial do equipamento. |
+
+| **Severidade do Bug** | **Prioridade de Correção** | **Status** |
+| :-------------------: | :------------------------: | :--------: |
+|         Média         |           Alta            |   Aberto   |
+
+| **Passo a passo para simular o bug**                           |
+| -------------------------------------------------------------- |
+| 1. Acessar o menu "Configurações" |
+| 2. Clicar na aba "Biometria" |
+| 3. Observar os campos Login e Senha |
+
+|                        **Comportamento Esperado**                       |                        **Comportamento Obtido**                        |
+| :---------------------------------------------------------------------: | :--------------------------------------------------------------------: |
+| A senha deve aparecer mascarada (••••), e o sistema deve recomendar a troca da senha padrão. | Login e senha aparecem em texto aberto. |
+
+| **Ambiente**             |
+| ------------------------ |
+| Ambiente de testes.      |
+| Desktop com Windows 11.  |
+| Chrome 155.0.8059.85     |
+| SIFIT                    |
+
+| **Funcionalidade Afetada** |           **Caso de Teste Relacionado**            |
+| :------------------------: | :------------------------------------------------: |
+|         Configurações / Biometria         | C37-CT02: Navegar entre as abas de configuração |
+
+|                **Evidência(s)**               |
+| :-------------------------------------------: |
+| [Vídeo](https://jam.dev/c/9c52920c-240b-49e1-8cac-e183cbf67b26) (0:05 a 0:06) |
+
+---
+
+### 🐞 **Bug 56: Botão "Gerar aulas" do SifitBox não gera aulas nem exibe mensagem**
+
+| **ID**     | **Descrição**                                                                                                                                  |
+| ---------- | ---------------------------------------------------------------------------------------------------------------------------------------------- |
+| BUG-056    | Na tela SifitBox - Aulas, com o período de 23/10/2026 a 30/10/2026 e turmas recorrentes cadastradas em "Box - Turmas", o botão "Gerar aulas" foi clicado várias vezes. Nenhuma aula foi criada, nenhuma mensagem de sucesso ou de erro foi exibida e a lista continuou com "Nenhuma aula encontrada no periodo." mesmo após clicar em "Buscar". |
+
+| **Severidade do Bug** | **Prioridade de Correção** | **Status** |
+| :-------------------: | :------------------------: | :--------: |
+|         Alta          |            Alta            |   Aberto   |
+
+| **Passo a passo para simular o bug**                           |
+| -------------------------------------------------------------- |
+| 1. Conferir em "Box - Turmas" que existem turmas recorrentes ativas |
+| 2. Acessar o menu "SifitBox" com o período de 23/10/2026 a 30/10/2026 |
+| 3. Clicar em "Gerar aulas"                                     |
+| 4. Clicar em "Buscar"                                          |
+
+|                        **Comportamento Esperado**                       |                        **Comportamento Obtido**                        |
+| :---------------------------------------------------------------------: | :--------------------------------------------------------------------: |
+| As aulas das turmas recorrentes devem ser geradas e exibidas, ou o sistema deve informar por que não gerou. | Nada acontece: nenhuma aula é gerada e nenhuma mensagem é exibida. |
+
+| **Ambiente**             |
+| ------------------------ |
+| Ambiente de testes.      |
+| Desktop com Windows 11.  |
+| Chrome 155.0.8059.85     |
+| SIFIT                    |
+
+| **Funcionalidade Afetada** |           **Caso de Teste Relacionado**            |
+| :------------------------: | :------------------------------------------------: |
+|          SifitBox          | C38-CT03: Gerar aulas do SifitBox                  |
+
+|                **Evidência(s)**               |
+| :-------------------------------------------: |
+| [Vídeo](https://jam.dev/c/2851a247-c28c-4af5-b678-18100c5083bd) (0:11 a 0:20 turmas cadastradas; 0:27 a 0:40 cliques em "Gerar aulas") |
+
+---
+
+### 🐞 **Bug 57: Tela Dashboard exibe o título "Despesas Fixas"**
+
+| **ID**     | **Descrição**                                                                                                                                  |
+| ---------- | ---------------------------------------------------------------------------------------------------------------------------------------------- |
+| BUG-057    | Ao acessar o menu "Dashboard" (endereço /dash), o menu lateral marca "Dashboard", mas o título da página exibido no topo é "Despesas Fixas". |
+
+| **Severidade do Bug** | **Prioridade de Correção** | **Status** |
+| :-------------------: | :------------------------: | :--------: |
+|         Baixa         |           Baixa            |   Aberto   |
+
+| **Passo a passo para simular o bug**                           |
+| -------------------------------------------------------------- |
+| 1. Realizar login no SIFIT                                     |
+| 2. Clicar no menu "Dashboard"                                  |
+| 3. Observar o título no topo da página                         |
+
+|                        **Comportamento Esperado**                       |                        **Comportamento Obtido**                        |
+| :---------------------------------------------------------------------: | :--------------------------------------------------------------------: |
+| O título da página deve ser "Dashboard".                               | O título exibido é "Despesas Fixas".                                   |
+
+| **Ambiente**             |
+| ------------------------ |
+| Ambiente de testes.      |
+| Desktop com Windows 11.  |
+| Chrome 155.0.8059.85     |
+| SIFIT                    |
+
+| **Funcionalidade Afetada** |           **Caso de Teste Relacionado**            |
+| :------------------------: | :------------------------------------------------: |
+|         Dashboard          | C39-CT01: Acesso ao Dashboard pelo menu            |
+
+|                **Evidência(s)**               |
+| :-------------------------------------------: |
+| [Vídeo](https://jam.dev/c/5ef4bb24-0b96-4099-ae8f-18d4a74f6314) (0:00 e 0:37) |
+
+---
+
+### 🐞 **Bug 58: Perfil do cliente mostra check-in registrado, mas "Últimas Presenças" aparece vazio**
+
+| **ID**     | **Descrição**                                                                                                                                  |
+| ---------- | ---------------------------------------------------------------------------------------------------------------------------------------------- |
+| BUG-058    | No perfil do cliente "Hendreu Teste" (#413), o bloco Desempenho do aluno informa "Total de check-ins 1", "Este mês 1 check-in" e "Último registro 21/10/2026", mas o bloco "Últimas Presenças" exibe "Nenhuma presença registrada". |
+
+| **Severidade do Bug** | **Prioridade de Correção** | **Status** |
+| :-------------------: | :------------------------: | :--------: |
+|         Média         |           Média            |   Aberto   |
+
+| **Passo a passo para simular o bug**                           |
+| -------------------------------------------------------------- |
+| 1. Acessar o menu "Clientes" e buscar "Hendreu Teste"          |
+| 2. Clicar na lupa do cliente                                   |
+| 3. Comparar o bloco "Desempenho do aluno" com o bloco "Últimas Presenças" |
+
+|                        **Comportamento Esperado**                       |                        **Comportamento Obtido**                        |
+| :---------------------------------------------------------------------: | :--------------------------------------------------------------------: |
+| O check-in de 21/10/2026 deve aparecer em "Últimas Presenças".          | "Últimas Presenças" mostra "Nenhuma presença registrada".              |
+
+| **Ambiente**             |
+| ------------------------ |
+| Ambiente de testes.      |
+| Desktop com Windows 11.  |
+| Chrome 155.0.8059.85     |
+| SIFIT                    |
+
+| **Funcionalidade Afetada** |           **Caso de Teste Relacionado**            |
+| :------------------------: | :------------------------------------------------: |
+|     Perfil do Cliente      | C40-CT01: Visualizar perfil do cliente             |
+
+|                **Evidência(s)**               |
+| :-------------------------------------------: |
+| [Vídeo](https://jam.dev/c/a088a7ce-c852-4bbd-8747-1d230586d096) (0:32 a 0:36) |
