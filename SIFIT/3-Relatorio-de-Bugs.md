@@ -4,7 +4,7 @@
 
 **QA responsável:** Hendreu Satoshi Zampieri Itami (240061)
 
-**Data:** 17.10.26
+**Data:** 23.10.26
 
 ---
 
@@ -535,7 +535,7 @@
 
 | **Funcionalidade Afetada** |           **Caso de Teste Relacionado**            |
 | :------------------------: | :------------------------------------------------: |
-|         Turmas         | C08-CT02: Cadastrar turma com horário inválido |
+|         Turmas         | C08-CT02: Tentar cadastrar turma com horário final igual ao inicial |
 
 |                **Evidência(s)**               |
 | :-------------------------------------------: |
@@ -574,7 +574,7 @@
 
 | **Funcionalidade Afetada** |           **Caso de Teste Relacionado**            |
 | :------------------------: | :------------------------------------------------: |
-|         Check-in         | C08-CT03: Realizar check-in de cliente |
+|         Check-in         | C08-CT03: Realizar check-in manual do aluno |
 
 |                **Evidência(s)**               |
 | :-------------------------------------------: |
@@ -612,7 +612,7 @@
 
 | **Funcionalidade Afetada** |           **Caso de Teste Relacionado**            |
 | :------------------------: | :------------------------------------------------: |
-|         Check-in         | C08-CT03: Realizar check-in de cliente |
+|         Check-in         | C08-CT03: Realizar check-in manual do aluno |
 
 |                **Evidência(s)**               |
 | :-------------------------------------------: |
@@ -690,7 +690,7 @@
 
 | **Funcionalidade Afetada** |           **Caso de Teste Relacionado**            |
 | :------------------------: | :------------------------------------------------: |
-|       Contas a Pagar       | C09-CT03: Conferir total das contas a pagar pendentes |
+|       Contas a Pagar       | C09-CT03: Verificar total das contas a pagar |
 
 |                **Evidência(s)**               |
 | :-------------------------------------------: |
@@ -729,7 +729,7 @@
 
 | **Funcionalidade Afetada** |           **Caso de Teste Relacionado**            |
 | :------------------------: | :------------------------------------------------: |
-|         Matrículas         | C04-CT03: Tentar cadastrar matrícula sem tipo de pagamento |
+|         Matrículas         | Teste exploratório (cadastro de matrícula) |
 
 |                **Evidência(s)**               |
 | :-------------------------------------------: |
@@ -769,7 +769,7 @@
 
 | **Funcionalidade Afetada** |           **Caso de Teste Relacionado**            |
 | :------------------------: | :------------------------------------------------: |
-|         Relatórios         | C10-CT02: Gerar relatório com período inválido |
+|         Relatórios         | C10-CT02: Gerar relatório com data de início maior que a de fim |
 
 |                **Evidência(s)**               |
 | :-------------------------------------------: |
@@ -1451,7 +1451,7 @@
 
 |                        **Comportamento Esperado**                       |                        **Comportamento Obtido**                        |
 | :---------------------------------------------------------------------: | :--------------------------------------------------------------------: |
-| A lista e os cards devem respeitar o período exibido desde a abertura da tela. | A lista inicial mostra caixas de 2022 a 2025 fora do período, e os números mudam ao clicar em "Buscar" com os mesmos filtros. |
+| A lista e os cards devem respeitar o período exibido desde a abertura da tela. | A lista inicial mostra caixas de anos anteriores, fora do período, e os números mudam ao clicar em "Buscar" com os mesmos filtros. |
 
 | **Ambiente**             |
 | ------------------------ |
@@ -2067,7 +2067,7 @@
 
 |                **Evidência(s)**               |
 | :-------------------------------------------: |
-| [Vídeo](https://jam.dev/c/9c52920c-240b-49e1-8cac-e183cbf67b26) (0:01 e 0:45 a 0:53 (o valor original -120 foi restaurado aos 0:57)) |
+| [Vídeo](https://jam.dev/c/9c52920c-240b-49e1-8cac-e183cbf67b26) (0:01 e 0:45 a 0:53; o valor original -120 foi restaurado aos 0:57) |
 
 ---
 

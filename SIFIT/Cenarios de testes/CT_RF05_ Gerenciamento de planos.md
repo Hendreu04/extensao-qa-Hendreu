@@ -60,7 +60,7 @@
 | **Passos**                                                        |
 | :---------------------------------------------------------------- |
 | **DADO** que o usuário acessa o menu "Planos"                     |
-| **QUANDO** verificar a quantidade de alunos do "Plano Diário" no ranking e na lista |
+| **QUANDO** verificar a quantidade de alunos do plano "Teste Diaria QA Verify" no ranking e na lista |
 | **ENTÃO** a quantidade deve ser a mesma nos dois lugares          |
 
 | **Critérios de aceitação**                                      |
