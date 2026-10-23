@@ -1618,3 +1618,232 @@
 |                **Evidência(s)**               |
 | :-------------------------------------------: |
 | [Vídeo](https://jam.dev/c/f74dc437-c900-4899-be8d-6f7b75f109e6) (0:25 a 0:28) |
+
+---
+
+### 🐞 **Bug 43: Não é possível cadastrar enquete**
+
+| **ID**     | **Descrição**                                                                                                                                  |
+| ---------- | ---------------------------------------------------------------------------------------------------------------------------------------------- |
+| BUG-043    | Ao salvar a enquete "Enquete Hendreu" com a pergunta "Voce gosta de treinos?" e as respostas "sim" e "nao", o sistema exibe "Erro ao salvar enquete" e nada é gravado. O erro ocorre com o status Ativo e Inativo, com uma ou duas respostas. As 30 enquetes da lista aparecem como "Sem pergunta cadastrada" e o card "Respostas" mostra 0. O banco estava respondendo no momento do teste (SELECT 1 executado com sucesso). |
+
+| **Severidade do Bug** | **Prioridade de Correção** | **Status** |
+| :-------------------: | :------------------------: | :--------: |
+|         Alta          |            Alta            |   Aberto   |
+
+| **Passo a passo para simular o bug**                           |
+| -------------------------------------------------------------- |
+| 1. Acessar o menu "Enquetes" e clicar em "Nova Enquete"        |
+| 2. Preencher o Nome "Enquete Hendreu" e a Pergunta "Voce gosta de treinos?" |
+| 3. Preencher as respostas "sim" e "nao"                        |
+| 4. Clicar em "Salvar"                                          |
+
+|                        **Comportamento Esperado**                       |                        **Comportamento Obtido**                        |
+| :---------------------------------------------------------------------: | :--------------------------------------------------------------------: |
+| A enquete deve ser salva e exibida na lista com a pergunta cadastrada.  | É exibido "Erro ao salvar enquete" e a enquete não é cadastrada.       |
+
+| **Ambiente**             |
+| ------------------------ |
+| Ambiente de testes.      |
+| Desktop com Windows 11.  |
+| Chrome 155.0.8059.85     |
+| SIFIT                    |
+
+| **Funcionalidade Afetada** |           **Caso de Teste Relacionado**            |
+| :------------------------: | :------------------------------------------------: |
+|          Enquetes          | C29-CT01: Adicionar nova enquete com pergunta      |
+
+|                **Evidência(s)**               |
+| :-------------------------------------------: |
+| [Vídeo](https://jam.dev/c/3017b60f-a6e0-4388-90f4-e669845a4e87) (0:47 a 1:05) |
+| Consulta no banco: SELECT 1 respondeu às 15:57 (banco disponível) |
+
+---
+
+### 🐞 **Bug 44: Anamnese pode ser aplicada sem selecionar aluno e termina com "Erro no servidor"**
+
+| **ID**     | **Descrição**                                                                                                                                  |
+| ---------- | ---------------------------------------------------------------------------------------------------------------------------------------------- |
+| BUG-044    | Na janela Aplicar Anamnese, o botão "Próxima" avança sem nenhum aluno selecionado, permitindo escolher o modelo, responder e revisar. Ao clicar em "Finalizar Anamnese", o sistema exibe "Erro no servidor – Erro interno inesperado." e, numa segunda tentativa, fica em "Salvando..." e volta sem salvar, sem nenhuma mensagem. |
+
+| **Severidade do Bug** | **Prioridade de Correção** | **Status** |
+| :-------------------: | :------------------------: | :--------: |
+|         Média         |           Média            |   Aberto   |
+
+| **Passo a passo para simular o bug**                           |
+| -------------------------------------------------------------- |
+| 1. Acessar "Fichas Anamnese" e clicar em "Nova Anamnese" |
+| 2. Não informar nenhum aluno e clicar em "Próxima" |
+| 3. Escolher o modelo "Triplet 2", clicar em "Iniciar" e depois em "Revisar" |
+| 4. Clicar em "Finalizar Anamnese" |
+
+|                        **Comportamento Esperado**                       |                        **Comportamento Obtido**                        |
+| :---------------------------------------------------------------------: | :--------------------------------------------------------------------: |
+| O sistema deve impedir o avanço e informar que é preciso selecionar um aluno. | O fluxo avança sem aluno e termina com "Erro no servidor" ou sem resposta. |
+
+| **Ambiente**             |
+| ------------------------ |
+| Ambiente de testes.      |
+| Desktop com Windows 11.  |
+| Chrome 155.0.8059.85     |
+| SIFIT                    |
+
+| **Funcionalidade Afetada** |           **Caso de Teste Relacionado**            |
+| :------------------------: | :------------------------------------------------: |
+|         Fichas de Anamnese         | C30-CT02: Tentar aplicar anamnese sem selecionar aluno |
+
+|                **Evidência(s)**               |
+| :-------------------------------------------: |
+| [Vídeo](https://jam.dev/c/3555370a-0ce3-49df-b4eb-33105bfebfdd) (0:07 a 0:17 e 0:28 a 0:40) |
+
+---
+
+### 🐞 **Bug 45: Modelo de anamnese informa 2 perguntas, mas exibe apenas 1 e a revisão mostra outra pergunta**
+
+| **ID**     | **Descrição**                                                                                                                                  |
+| ---------- | ---------------------------------------------------------------------------------------------------------------------------------------------- |
+| BUG-045    | O modelo "Triplet 2" aparece com "2 perguntas" na seleção, mas o questionário mostra "Pergunta 1 de 1" ("qual é o exercicio"). Na tela de revisão, a resposta aparece ligada a outra pergunta ("quais tipos"). |
+
+| **Severidade do Bug** | **Prioridade de Correção** | **Status** |
+| :-------------------: | :------------------------: | :--------: |
+|         Média         |           Média            |   Aberto   |
+
+| **Passo a passo para simular o bug**                           |
+| -------------------------------------------------------------- |
+| 1. Acessar "Fichas Anamnese" e clicar em "Nova Anamnese" |
+| 2. Avançar até a escolha do modelo e selecionar "Triplet 2" |
+| 3. Clicar em "Iniciar" e observar a quantidade de perguntas |
+| 4. Responder e clicar em "Revisar" |
+
+|                        **Comportamento Esperado**                       |                        **Comportamento Obtido**                        |
+| :---------------------------------------------------------------------: | :--------------------------------------------------------------------: |
+| O questionário deve exibir as 2 perguntas do modelo, e a revisão deve mostrar a mesma pergunta respondida. | Só 1 pergunta é exibida, e a revisão mostra uma pergunta diferente da respondida. |
+
+| **Ambiente**             |
+| ------------------------ |
+| Ambiente de testes.      |
+| Desktop com Windows 11.  |
+| Chrome 155.0.8059.85     |
+| SIFIT                    |
+
+| **Funcionalidade Afetada** |           **Caso de Teste Relacionado**            |
+| :------------------------: | :------------------------------------------------: |
+|         Fichas de Anamnese         | C30-CT01: Aplicar nova anamnese a um aluno |
+
+|                **Evidência(s)**               |
+| :-------------------------------------------: |
+| [Vídeo](https://jam.dev/c/3555370a-0ce3-49df-b4eb-33105bfebfdd) (0:09 a 0:14 e 0:34 a 0:37) |
+
+---
+
+### 🐞 **Bug 46: Anamnese aplicada ao aluno não é gravada**
+
+| **ID**     | **Descrição**                                                                                                                                  |
+| ---------- | ---------------------------------------------------------------------------------------------------------------------------------------------- |
+| BUG-046    | Ao aplicar o modelo "Triplet 2" ao aluno "Hendreu Teste", responder e clicar em "Finalizar Anamnese", a janela fecha sem mensagem de sucesso ou de erro. A lista continua com "Nenhuma ficha encontrada" e todos os cards em 0. No banco, a tabela ficha_anamnese não tem nenhum registro. |
+
+| **Severidade do Bug** | **Prioridade de Correção** | **Status** |
+| :-------------------: | :------------------------: | :--------: |
+|         Alta          |            Alta            |   Aberto   |
+
+| **Passo a passo para simular o bug**                           |
+| -------------------------------------------------------------- |
+| 1. Acessar "Fichas Anamnese" e clicar em "Nova Anamnese"       |
+| 2. Buscar e selecionar o aluno "Hendreu Teste"                 |
+| 3. Escolher o modelo "Triplet 2", clicar em "Iniciar", responder e clicar em "Revisar" |
+| 4. Clicar em "Finalizar Anamnese"                              |
+| 5. Consultar no banco: SELECT * FROM ficha_anamnese ORDER BY id DESC LIMIT 5; |
+
+|                        **Comportamento Esperado**                       |                        **Comportamento Obtido**                        |
+| :---------------------------------------------------------------------: | :--------------------------------------------------------------------: |
+| A ficha deve ser salva e exibida na lista com status Pendente ou Concluído. | A janela fecha sem aviso, a lista continua vazia e nada é gravado no banco. |
+
+| **Ambiente**             |
+| ------------------------ |
+| Ambiente de testes.      |
+| Desktop com Windows 11.  |
+| Chrome 155.0.8059.85     |
+| SIFIT                    |
+
+| **Funcionalidade Afetada** |           **Caso de Teste Relacionado**            |
+| :------------------------: | :------------------------------------------------: |
+|     Fichas de Anamnese     | C30-CT01: Aplicar nova anamnese a um aluno         |
+
+|                **Evidência(s)**               |
+| :-------------------------------------------: |
+| [Vídeo](https://jam.dev/c/b5f3781c-f45f-4920-a0de-b87f5422c2c7) (0:04 a 0:19) |
+| Consulta no banco: ficha_anamnese sem nenhum registro (0 rows) |
+
+---
+
+### 🐞 **Bug 47: Preview do modelo de anamnese não mostra as perguntas cadastradas**
+
+| **ID**     | **Descrição**                                                                                                                                  |
+| ---------- | ---------------------------------------------------------------------------------------------------------------------------------------------- |
+| BUG-047    | Ao clicar em "Preview" no modelo "Triplet 2" (2 perguntas) e no "Modelo Hendreu" (1 pergunta), a janela exibe "Nenhuma pergunta adicionada ainda.", embora os cards dos modelos informem a quantidade de perguntas. |
+
+| **Severidade do Bug** | **Prioridade de Correção** | **Status** |
+| :-------------------: | :------------------------: | :--------: |
+|         Média         |           Média            |   Aberto   |
+
+| **Passo a passo para simular o bug**                           |
+| -------------------------------------------------------------- |
+| 1. Acessar o menu "Modelos" de Anamnese |
+| 2. Clicar em "Preview" no modelo "Triplet 2" |
+| 3. Repetir no "Modelo Hendreu" |
+
+|                        **Comportamento Esperado**                       |                        **Comportamento Obtido**                        |
+| :---------------------------------------------------------------------: | :--------------------------------------------------------------------: |
+| O preview deve exibir as perguntas do modelo como o aluno verá. | É exibido "Nenhuma pergunta adicionada ainda." nos dois modelos. |
+
+| **Ambiente**             |
+| ------------------------ |
+| Ambiente de testes.      |
+| Desktop com Windows 11.  |
+| Chrome 155.0.8059.85     |
+| SIFIT                    |
+
+| **Funcionalidade Afetada** |           **Caso de Teste Relacionado**            |
+| :------------------------: | :------------------------------------------------: |
+|         Modelos de Anamnese         | C31-CT02: Visualizar prévia do modelo |
+
+|                **Evidência(s)**               |
+| :-------------------------------------------: |
+| [Vídeo](https://jam.dev/c/5274fc54-e9cb-40c5-8aae-1c2a0ec85fe9) (0:11 a 0:16 e 0:36 a 0:38) |
+
+---
+
+### 🐞 **Bug 48: Modelo de anamnese mostra 3 aplicações, mas nenhuma ficha existe**
+
+| **ID**     | **Descrição**                                                                                                                                  |
+| ---------- | ---------------------------------------------------------------------------------------------------------------------------------------------- |
+| BUG-048    | O card "Aplicações" e o modelo "Triplet 2" informam 3 aplicações, mas a tela Fichas de Anamnese mostra 0 fichas e a tabela ficha_anamnese do banco está vazia. |
+
+| **Severidade do Bug** | **Prioridade de Correção** | **Status** |
+| :-------------------: | :------------------------: | :--------: |
+|         Baixa         |           Baixa            |   Aberto   |
+
+| **Passo a passo para simular o bug**                           |
+| -------------------------------------------------------------- |
+| 1. Acessar o menu "Modelos" de Anamnese e observar o card "Aplicações" e o modelo "Triplet 2" |
+| 2. Acessar "Fichas Anamnese" e observar o total de fichas |
+| 3. Consultar no banco: SELECT * FROM ficha_anamnese; |
+
+|                        **Comportamento Esperado**                       |                        **Comportamento Obtido**                        |
+| :---------------------------------------------------------------------: | :--------------------------------------------------------------------: |
+| A quantidade de aplicações deve ser igual à quantidade de fichas aplicadas. | O card mostra 3 aplicações, enquanto não existe nenhuma ficha. |
+
+| **Ambiente**             |
+| ------------------------ |
+| Ambiente de testes.      |
+| Desktop com Windows 11.  |
+| Chrome 155.0.8059.85     |
+| SIFIT                    |
+
+| **Funcionalidade Afetada** |           **Caso de Teste Relacionado**            |
+| :------------------------: | :------------------------------------------------: |
+|         Modelos de Anamnese         | C31-CT03: Filtrar modelos por status |
+
+|                **Evidência(s)**               |
+| :-------------------------------------------: |
+| [Vídeo](https://jam.dev/c/5274fc54-e9cb-40c5-8aae-1c2a0ec85fe9) (0:05 e 0:35) |
