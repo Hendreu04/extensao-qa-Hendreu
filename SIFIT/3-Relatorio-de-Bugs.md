@@ -1847,3 +1847,114 @@
 |                **Evidência(s)**               |
 | :-------------------------------------------: |
 | [Vídeo](https://jam.dev/c/5274fc54-e9cb-40c5-8aae-1c2a0ec85fe9) (0:05 e 0:35) |
+
+---
+
+### 🐞 **Bug 49: Card "Com perguntas" conta categoria recém-criada sem nenhuma pergunta**
+
+| **ID**     | **Descrição**                                                                                                                                  |
+| ---------- | ---------------------------------------------------------------------------------------------------------------------------------------------- |
+| BUG-049    | Após criar a categoria "Historico de Lesoes", sem nenhuma pergunta vinculada, o card "Com perguntas" passa de 3 para 4. O card acompanha o total de categorias em vez de contar apenas as que têm perguntas. |
+
+| **Severidade do Bug** | **Prioridade de Correção** | **Status** |
+| :-------------------: | :------------------------: | :--------: |
+|         Baixa         |           Baixa            |   Aberto   |
+
+| **Passo a passo para simular o bug**                           |
+| -------------------------------------------------------------- |
+| 1. Acessar o menu "Categorias" de Anamnese e observar o card "Com perguntas" |
+| 2. Clicar em "Nova Categoria", preencher o nome e clicar em "Criar Categoria" |
+| 3. Observar novamente o card "Com perguntas"                   |
+
+|                        **Comportamento Esperado**                       |                        **Comportamento Obtido**                        |
+| :---------------------------------------------------------------------: | :--------------------------------------------------------------------: |
+| O card deve continuar em 3, pois a nova categoria não tem perguntas.    | O card passa para 4, igual ao total de categorias.                     |
+
+| **Ambiente**             |
+| ------------------------ |
+| Ambiente de testes.      |
+| Desktop com Windows 11.  |
+| Chrome 155.0.8059.85     |
+| SIFIT                    |
+
+| **Funcionalidade Afetada** |           **Caso de Teste Relacionado**            |
+| :------------------------: | :------------------------------------------------: |
+|  Categorias de Anamnese    | C32-CT01: Adicionar nova categoria com dados válidos |
+
+|                **Evidência(s)**               |
+| :-------------------------------------------: |
+| [Vídeo](https://jam.dev/c/f53f9550-0b7a-4e79-b236-1f6d05feb717) (0:01 e 0:27) |
+
+---
+
+### 🐞 **Bug 50: Sistema permite cadastrar pergunta de anamnese sem nome e sem texto**
+
+| **ID**     | **Descrição**                                                                                                                                  |
+| ---------- | ---------------------------------------------------------------------------------------------------------------------------------------------- |
+| BUG-050    | Ao clicar em "Salvar" no cadastro de pergunta com os campos Nome e Pergunta em branco, o sistema salva sem mensagem de erro. O total passa de 2 para 3 (#7) e, numa segunda tentativa, para 4 (#8), com linhas vazias na lista. Essas perguntas não podem ser encontradas pela busca. |
+
+| **Severidade do Bug** | **Prioridade de Correção** | **Status** |
+| :-------------------: | :------------------------: | :--------: |
+|         Média         |           Alta            |   Aberto   |
+
+| **Passo a passo para simular o bug**                           |
+| -------------------------------------------------------------- |
+| 1. Acessar o menu "Perguntas" de Anamnese e clicar em "Nova Pergunta" |
+| 2. Deixar os campos Nome e Pergunta em branco |
+| 3. Clicar em "Salvar" |
+| 4. Observar a lista e o card "Total de perguntas" |
+
+|                        **Comportamento Esperado**                       |                        **Comportamento Obtido**                        |
+| :---------------------------------------------------------------------: | :--------------------------------------------------------------------: |
+| O sistema deve impedir o cadastro e informar que o texto da pergunta é obrigatório. | A pergunta é salva vazia e aparece na lista. |
+
+| **Ambiente**             |
+| ------------------------ |
+| Ambiente de testes.      |
+| Desktop com Windows 11.  |
+| Chrome 155.0.8059.85     |
+| SIFIT                    |
+
+| **Funcionalidade Afetada** |           **Caso de Teste Relacionado**            |
+| :------------------------: | :------------------------------------------------: |
+|         Perguntas de Anamnese         | C33-CT02: Tentar adicionar pergunta em branco |
+
+|                **Evidência(s)**               |
+| :-------------------------------------------: |
+| [Vídeo](https://jam.dev/c/f3ac1ddf-61d0-4eae-bf87-ecc0602b5dd2) (0:03 a 0:08) |
+
+---
+
+### 🐞 **Bug 51: Cadastro de pergunta de anamnese não tem campo para escolher a categoria**
+
+| **ID**     | **Descrição**                                                                                                                                  |
+| ---------- | ---------------------------------------------------------------------------------------------------------------------------------------------- |
+| BUG-051    | O formulário "Pergunta Anamnese" tem apenas Código, Nome, Status, Pergunta, Número e Tipo Resposta. Não existe campo de categoria, então não é possível ligar a pergunta a uma das categorias cadastradas (ex.: "Historico de Lesoes"). As categorias continuam sem relação com as perguntas criadas. |
+
+| **Severidade do Bug** | **Prioridade de Correção** | **Status** |
+| :-------------------: | :------------------------: | :--------: |
+|         Média         |           Média            |   Aberto   |
+
+| **Passo a passo para simular o bug**                           |
+| -------------------------------------------------------------- |
+| 1. Acessar o menu "Perguntas" de Anamnese e clicar em "Nova Pergunta" |
+| 2. Procurar um campo para escolher a categoria |
+
+|                        **Comportamento Esperado**                       |                        **Comportamento Obtido**                        |
+| :---------------------------------------------------------------------: | :--------------------------------------------------------------------: |
+| O formulário deve permitir escolher a categoria da pergunta. | Não há campo de categoria no formulário. |
+
+| **Ambiente**             |
+| ------------------------ |
+| Ambiente de testes.      |
+| Desktop com Windows 11.  |
+| Chrome 155.0.8059.85     |
+| SIFIT                    |
+
+| **Funcionalidade Afetada** |           **Caso de Teste Relacionado**            |
+| :------------------------: | :------------------------------------------------: |
+|         Perguntas de Anamnese         | C33-CT01: Adicionar nova pergunta com dados válidos |
+
+|                **Evidência(s)**               |
+| :-------------------------------------------: |
+| [Vídeo](https://jam.dev/c/f3ac1ddf-61d0-4eae-bf87-ecc0602b5dd2) (0:09 a 0:23) |
