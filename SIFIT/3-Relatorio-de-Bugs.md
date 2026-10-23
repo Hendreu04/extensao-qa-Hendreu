@@ -1429,3 +1429,78 @@
 | :-------------------------------------------: |
 | [Vídeo](https://jam.dev/c/3b9274a5-017d-49c6-a478-22969296701e) (0:10 a 0:18 e 0:28 a 0:32) |
 | Consulta no banco: bandeiras ids 27 a 31, sendo o 30 "Visa", com status NULL |
+
+---
+
+### 🐞 **Bug 38: Tela de Caixas abre ignorando o período exibido nos filtros**
+
+| **ID**     | **Descrição**                                                                                                                                  |
+| ---------- | ---------------------------------------------------------------------------------------------------------------------------------------------- |
+| BUG-038    | Ao abrir a tela Caixas, os filtros já mostram o período de 01/10/2026 a 31/10/2026, mas a lista exibe 20 caixas de 2022 a 2026 e os cards mostram 18 caixas fechados e 20 registros no período. Depois de clicar em "Buscar" com os mesmos filtros, a lista passa a mostrar apenas 2 caixas e os cards mudam para 0 fechados e 2 registros. |
+
+| **Severidade do Bug** | **Prioridade de Correção** | **Status** |
+| :-------------------: | :------------------------: | :--------: |
+|         Média         |           Média            |   Aberto   |
+
+| **Passo a passo para simular o bug**                           |
+| -------------------------------------------------------------- |
+| 1. Acessar o menu "Caixas" |
+| 2. Observar o período nos filtros (01/10/2026 a 31/10/2026) |
+| 3. Observar as datas dos caixas na lista e os cards |
+| 4. Clicar em "Buscar" sem alterar os filtros |
+
+|                        **Comportamento Esperado**                       |                        **Comportamento Obtido**                        |
+| :---------------------------------------------------------------------: | :--------------------------------------------------------------------: |
+| A lista e os cards devem respeitar o período exibido desde a abertura da tela. | A lista inicial mostra caixas de 2022 a 2025 fora do período, e os números mudam ao clicar em "Buscar" com os mesmos filtros. |
+
+| **Ambiente**             |
+| ------------------------ |
+| Ambiente de testes.      |
+| Desktop com Windows 11.  |
+| Chrome 155.0.8059.85     |
+| SIFIT                    |
+
+| **Funcionalidade Afetada** |           **Caso de Teste Relacionado**            |
+| :------------------------: | :------------------------------------------------: |
+|         Caixas         | C25-CT02: Filtrar caixas por status |
+
+|                **Evidência(s)**               |
+| :-------------------------------------------: |
+| [Vídeo](https://jam.dev/c/358a7731-1720-44d4-a9e4-489a9d7aa977) (0:03 a 0:21 e 0:27 a 0:34) |
+
+---
+
+### 🐞 **Bug 39: "Erro no servidor" ao abrir caixa sem selecionar o local**
+
+| **ID**     | **Descrição**                                                                                                                                  |
+| ---------- | ---------------------------------------------------------------------------------------------------------------------------------------------- |
+| BUG-039    | Ao clicar em "Salvar" na janela Abrir Caixa sem selecionar o Local de Caixa, o sistema exibe "Erro no servidor – Erro interno inesperado." em vez de indicar o campo obrigatório. Com o local "Caixa Academia" selecionado, o caixa é aberto normalmente. |
+
+| **Severidade do Bug** | **Prioridade de Correção** | **Status** |
+| :-------------------: | :------------------------: | :--------: |
+|         Média         |           Média            |   Aberto   |
+
+| **Passo a passo para simular o bug**                           |
+| -------------------------------------------------------------- |
+| 1. Acessar o menu "Caixas" e clicar em "Abrir Caixa" |
+| 2. Deixar o campo Local de Caixa vazio |
+| 3. Clicar em "Salvar" |
+
+|                        **Comportamento Esperado**                       |                        **Comportamento Obtido**                        |
+| :---------------------------------------------------------------------: | :--------------------------------------------------------------------: |
+| O sistema deve informar que o Local de Caixa é obrigatório. | É exibido "Erro no servidor – Erro interno inesperado.". |
+
+| **Ambiente**             |
+| ------------------------ |
+| Ambiente de testes.      |
+| Desktop com Windows 11.  |
+| Chrome 155.0.8059.85     |
+| SIFIT                    |
+
+| **Funcionalidade Afetada** |           **Caso de Teste Relacionado**            |
+| :------------------------: | :------------------------------------------------: |
+|         Caixas         | C25-CT01: Abrir caixa com dados válidos |
+
+|                **Evidência(s)**               |
+| :-------------------------------------------: |
+| [Vídeo](https://jam.dev/c/358a7731-1720-44d4-a9e4-489a9d7aa977) (0:38 a 0:41) |
