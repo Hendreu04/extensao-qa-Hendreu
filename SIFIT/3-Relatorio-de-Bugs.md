@@ -1504,3 +1504,117 @@
 |                **Evidência(s)**               |
 | :-------------------------------------------: |
 | [Vídeo](https://jam.dev/c/358a7731-1720-44d4-a9e4-489a9d7aa977) (0:38 a 0:41) |
+
+---
+
+### 🐞 **Bug 40: Painel Pagar.me mostra R$ 38.420,00 em recebimentos sem nenhuma transação**
+
+| **ID**     | **Descrição**                                                                                                                                  |
+| ---------- | ---------------------------------------------------------------------------------------------------------------------------------------------- |
+| BUG-040    | O painel Pagar.me exibe "Recebimentos R$ 38.420,00" nos últimos 30 dias (+18,6% vs período anterior), com gráfico e percentuais por meio de pagamento (Cartão 62%, PIX 23%, Boleto 10%, Recorrência 3%, Outros 2%). Porém os valores de cada meio de pagamento e todos os saldos aparecem como "R$ --", a lista de Transações recentes está vazia e "Ver todas as transações" informa "Nenhuma transação encontrada no período". Os números do gráfico não têm origem nas transações e parecem fixos (dados de exemplo). |
+
+| **Severidade do Bug** | **Prioridade de Correção** | **Status** |
+| :-------------------: | :------------------------: | :--------: |
+|         Alta          |            Alta            |   Aberto   |
+
+| **Passo a passo para simular o bug**                           |
+| -------------------------------------------------------------- |
+| 1. Acessar o menu "Pagar.me"                                   |
+| 2. Observar o total de Recebimentos e os Meios de pagamento    |
+| 3. Observar os saldos e as Transações recentes                 |
+| 4. Clicar em "Ver todas as transações"                         |
+
+|                        **Comportamento Esperado**                       |                        **Comportamento Obtido**                        |
+| :---------------------------------------------------------------------: | :--------------------------------------------------------------------: |
+| O total de recebimentos deve corresponder às transações do período e aos valores por meio de pagamento. | O total é R$ 38.420,00, mas não há nenhuma transação e os valores por meio de pagamento aparecem como "R$ --". |
+
+| **Ambiente**             |
+| ------------------------ |
+| Ambiente de testes.      |
+| Desktop com Windows 11.  |
+| Chrome 155.0.8059.85     |
+| SIFIT                    |
+
+| **Funcionalidade Afetada** |           **Caso de Teste Relacionado**            |
+| :------------------------: | :------------------------------------------------: |
+|          Pagar.me          | C26-CT02: Verificar coerência dos valores de recebimento |
+
+|                **Evidência(s)**               |
+| :-------------------------------------------: |
+| [Vídeo](https://jam.dev/c/b0dd20aa-9807-4d90-8e89-d69506a338e6) (0:01 a 0:06 e 0:18 a 0:19) |
+
+---
+
+### 🐞 **Bug 41: Sistema permite cadastrar atividade sem nome**
+
+| **ID**     | **Descrição**                                                                                                                                  |
+| ---------- | ---------------------------------------------------------------------------------------------------------------------------------------------- |
+| BUG-041    | Ao clicar em "Salvar" no cadastro de atividade com os campos Nome e Pontuação em branco, o sistema não exibe mensagem de erro e o registro é criado. O card "Total de atividades" passa de 5 para 6 (#7) e, em uma segunda tentativa, de 7 para 8 (#9), com linhas sem nome na lista. Já existia o #6 também sem nome. |
+
+| **Severidade do Bug** | **Prioridade de Correção** | **Status** |
+| :-------------------: | :------------------------: | :--------: |
+|         Média         |            Alta            |   Aberto   |
+
+| **Passo a passo para simular o bug**                           |
+| -------------------------------------------------------------- |
+| 1. Acessar o menu "Atividades" e clicar em "Nova Atividade"    |
+| 2. Deixar os campos Nome e Pontuação em branco                 |
+| 3. Clicar em "Salvar"                                          |
+| 4. Observar a lista e o card "Total de atividades"             |
+
+|                        **Comportamento Esperado**                       |                        **Comportamento Obtido**                        |
+| :---------------------------------------------------------------------: | :--------------------------------------------------------------------: |
+| O sistema deve impedir o cadastro e exibir uma mensagem de erro no campo Nome. | A atividade é salva sem nome e aparece na lista. |
+
+| **Ambiente**             |
+| ------------------------ |
+| Ambiente de testes.      |
+| Desktop com Windows 11.  |
+| Chrome 155.0.8059.85     |
+| SIFIT                    |
+
+| **Funcionalidade Afetada** |           **Caso de Teste Relacionado**            |
+| :------------------------: | :------------------------------------------------: |
+|         Atividades         | C27-CT02: Tentar adicionar atividade sem nome      |
+
+|                **Evidência(s)**               |
+| :-------------------------------------------: |
+| [Vídeo](https://jam.dev/c/ed415e90-3014-48aa-a674-47e90cc67b41) (0:03 a 0:05 e 0:28 a 0:30) |
+
+---
+
+### 🐞 **Bug 42: Pontuação sem datas é salva com período "0000-00-00 — 0000-00-00"**
+
+| **ID**     | **Descrição**                                                                                                                                  |
+| ---------- | ---------------------------------------------------------------------------------------------------------------------------------------------- |
+| BUG-042    | Ao cadastrar a pontuação "Desafio de Novembro" (tipo Mensal) sem preencher Data Inicial e Data Final, o sistema salva sem aviso e a lista exibe o período "0000-00-00 — 0000-00-00", uma data inválida. O mesmo ocorre com a pontuação #6. |
+
+| **Severidade do Bug** | **Prioridade de Correção** | **Status** |
+| :-------------------: | :------------------------: | :--------: |
+|         Baixa         |           Média            |   Aberto   |
+
+| **Passo a passo para simular o bug**                           |
+| -------------------------------------------------------------- |
+| 1. Acessar o menu "Pontuação" e clicar em "Nova Pontuação"     |
+| 2. Preencher o Nome e manter o Tipo "Mensal"                   |
+| 3. Deixar Data Inicial e Data Final em branco                  |
+| 4. Clicar em "Salvar" e observar a coluna Período              |
+
+|                        **Comportamento Esperado**                       |                        **Comportamento Obtido**                        |
+| :---------------------------------------------------------------------: | :--------------------------------------------------------------------: |
+| O sistema deve exigir as datas ou exibir o período de forma válida (ex.: "Mensal" ou "-"). | O período aparece como "0000-00-00 — 0000-00-00". |
+
+| **Ambiente**             |
+| ------------------------ |
+| Ambiente de testes.      |
+| Desktop com Windows 11.  |
+| Chrome 155.0.8059.85     |
+| SIFIT                    |
+
+| **Funcionalidade Afetada** |           **Caso de Teste Relacionado**            |
+| :------------------------: | :------------------------------------------------: |
+|         Pontuação          | C28-CT01: Adicionar nova pontuação com dados válidos |
+
+|                **Evidência(s)**               |
+| :-------------------------------------------: |
+| [Vídeo](https://jam.dev/c/f74dc437-c900-4899-be8d-6f7b75f109e6) (0:25 a 0:28) |
