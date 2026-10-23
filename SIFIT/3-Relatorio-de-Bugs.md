@@ -1274,6 +1274,7 @@
 | :-------------------------------------------: |
 | [Vídeo](https://jam.dev/c/ba72c986-89c6-4e48-8d0f-12602f40d271) (gravado às 11:47 de Brasília, 14:47 UTC) |
 | Consulta no banco: modelos_contrato id 14, created_at 2026-10-23 02:47:18 |
+| Consulta no banco: bandeiras ids 30 e 31, criadas às 15:49 UTC e gravadas como 2026-10-23 03:49 |
 | [Vídeo](https://jam.dev/c/64d30fb2-224f-4f30-848f-cb7adca31a22) (gravado às 13:12 UTC) e consulta no banco: login id 180, created_at 2026-10-22 01:12:11 |
 
 ---
@@ -1389,3 +1390,42 @@
 |                **Evidência(s)**               |
 | :-------------------------------------------: |
 | [Vídeo](https://jam.dev/c/4db1abb7-f50e-43e4-bcf2-cf768b968898) (0:22 a 0:27 e 0:47 a 0:51) |
+
+---
+
+### 🐞 **Bug 37: Lista de Bandeiras de Cartão aparece vazia mesmo com bandeiras cadastradas**
+
+| **ID**     | **Descrição**                                                                                                                                  |
+| ---------- | ---------------------------------------------------------------------------------------------------------------------------------------------- |
+| BUG-037    | Após salvar a bandeira "Visa", a tela Bandeiras de Cartão continua exibindo "Nenhuma bandeira encontrada", e a busca por "Visa" também não retorna nada. No banco, a tabela bandeiras tem a "Visa" (id 30) e outras bandeiras (ids 27 a 31), todas com a coluna status vazia (NULL). Isso também explica a janela "Escolher Bandeira" vazia do BUG-017. |
+
+| **Severidade do Bug** | **Prioridade de Correção** | **Status** |
+| :-------------------: | :------------------------: | :--------: |
+|         Alta          |            Alta            |   Aberto   |
+
+| **Passo a passo para simular o bug**                           |
+| -------------------------------------------------------------- |
+| 1. Acessar o menu "Bandeiras" e clicar em "Nova Bandeira"      |
+| 2. Preencher "Visa" no campo Nome                              |
+| 3. Clicar em "Salvar"                                          |
+| 4. Observar a lista e buscar por "Visa"                        |
+
+|                        **Comportamento Esperado**                       |                        **Comportamento Obtido**                        |
+| :---------------------------------------------------------------------: | :--------------------------------------------------------------------: |
+| A bandeira salva e as demais cadastradas devem aparecer na lista e na busca. | A lista e a busca mostram "Nenhuma bandeira encontrada", embora o banco tenha 5 bandeiras. |
+
+| **Ambiente**             |
+| ------------------------ |
+| Ambiente de testes.      |
+| Desktop com Windows 11.  |
+| Chrome 155.0.8059.85     |
+| SIFIT                    |
+
+| **Funcionalidade Afetada** |           **Caso de Teste Relacionado**            |
+| :------------------------: | :------------------------------------------------: |
+|    Bandeiras de Cartão     | C23-CT01: Adicionar nova bandeira com dados válidos |
+
+|                **Evidência(s)**               |
+| :-------------------------------------------: |
+| [Vídeo](https://jam.dev/c/3b9274a5-017d-49c6-a478-22969296701e) (0:10 a 0:18 e 0:28 a 0:32) |
+| Consulta no banco: bandeiras ids 27 a 31, sendo o 30 "Visa", com status NULL |
