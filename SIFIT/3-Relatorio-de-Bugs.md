@@ -1275,3 +1275,117 @@
 | [Vídeo](https://jam.dev/c/ba72c986-89c6-4e48-8d0f-12602f40d271) (gravado às 11:47 de Brasília, 14:47 UTC) |
 | Consulta no banco: modelos_contrato id 14, created_at 2026-10-23 02:47:18 |
 | [Vídeo](https://jam.dev/c/64d30fb2-224f-4f30-848f-cb7adca31a22) (gravado às 13:12 UTC) e consulta no banco: login id 180, created_at 2026-10-22 01:12:11 |
+
+---
+
+### 🐞 **Bug 34: Sistema permite cadastrar tipo de pagamento sem nome**
+
+| **ID**     | **Descrição**                                                                                                                                  |
+| ---------- | ---------------------------------------------------------------------------------------------------------------------------------------------- |
+| BUG-034    | Ao clicar em "Salvar" no cadastro de tipo de pagamento com o campo Nome em branco, o sistema não exibe mensagem de erro e o registro é criado. O total passa de 12 para 13 e aparece o código #14 sem nome na lista (já existia o #13, também sem nome). No banco, a coluna nome da tabela tipo_pagamentos aceita valor vazio (Null = YES). |
+
+| **Severidade do Bug** | **Prioridade de Correção** | **Status** |
+| :-------------------: | :------------------------: | :--------: |
+|         Média         |           Alta            |   Aberto   |
+
+| **Passo a passo para simular o bug**                           |
+| -------------------------------------------------------------- |
+| 1. Acessar o menu "Tipos de Pagamento" e clicar em "Novo" |
+| 2. Deixar o campo Nome em branco |
+| 3. Clicar em "Salvar" |
+| 4. Observar a lista e o card "Total" |
+
+|                        **Comportamento Esperado**                       |                        **Comportamento Obtido**                        |
+| :---------------------------------------------------------------------: | :--------------------------------------------------------------------: |
+| O sistema deve impedir o cadastro e exibir uma mensagem de erro no campo Nome. | O tipo de pagamento é salvo sem nome. |
+
+| **Ambiente**             |
+| ------------------------ |
+| Ambiente de testes.      |
+| Desktop com Windows 11.  |
+| Chrome 155.0.8059.85     |
+| SIFIT                    |
+
+| **Funcionalidade Afetada** |           **Caso de Teste Relacionado**            |
+| :------------------------: | :------------------------------------------------: |
+|         Tipos de Pagamento         | C22-CT02: Tentar adicionar tipo de pagamento sem nome |
+
+|                **Evidência(s)**               |
+| :-------------------------------------------: |
+| [Vídeo](https://jam.dev/c/4db1abb7-f50e-43e4-bcf2-cf768b968898) (0:10 a 0:16) |
+
+---
+
+### 🐞 **Bug 35: Tipo de pagamento cadastrado como "Ativo" aparece como "Inativo"**
+
+| **ID**     | **Descrição**                                                                                                                                  |
+| ---------- | ---------------------------------------------------------------------------------------------------------------------------------------------- |
+| BUG-035    | O tipo "Pix Hendreu" foi cadastrado com o Status "Ativo", mas aparece na lista como INATIVO (#15). Todos os 14 tipos de pagamento aparecem como INATIVO e o card "Ativos" mostra 0, embora o tipo "Dinheiro" seja aceito normalmente no cadastro de matrícula. Na consulta ao banco (DESCRIBE tipo_pagamentos), a tabela não tem nenhuma coluna de status: o campo Status da tela não é gravado, e por isso todos os registros aparecem como inativos. |
+
+| **Severidade do Bug** | **Prioridade de Correção** | **Status** |
+| :-------------------: | :------------------------: | :--------: |
+|         Alta         |           Alta            |   Aberto   |
+
+| **Passo a passo para simular o bug**                           |
+| -------------------------------------------------------------- |
+| 1. Acessar "Tipos de Pagamento" e clicar em "Novo" |
+| 2. Preencher o Nome "Pix Hendreu", manter o Status "Ativo" e o Tipo "Débito" |
+| 3. Clicar em "Salvar" |
+| 4. Observar o status do registro na lista |
+
+|                        **Comportamento Esperado**                       |                        **Comportamento Obtido**                        |
+| :---------------------------------------------------------------------: | :--------------------------------------------------------------------: |
+| O tipo de pagamento deve aparecer com o status informado no cadastro (Ativo). | O registro aparece como INATIVO e o card "Ativos" continua 0. |
+
+| **Ambiente**             |
+| ------------------------ |
+| Ambiente de testes.      |
+| Desktop com Windows 11.  |
+| Chrome 155.0.8059.85     |
+| SIFIT                    |
+
+| **Funcionalidade Afetada** |           **Caso de Teste Relacionado**            |
+| :------------------------: | :------------------------------------------------: |
+|         Tipos de Pagamento         | C22-CT01: Adicionar novo tipo de pagamento |
+
+|                **Evidência(s)**               |
+| :-------------------------------------------: |
+| [Vídeo](https://jam.dev/c/4db1abb7-f50e-43e4-bcf2-cf768b968898) (0:31 a 0:45) |
+| Consulta no banco: DESCRIBE tipo_pagamentos sem coluna de status (id, empresa_id, nome, tipo, via_gateway, escolher_bandeira, created_at, updated_at) |
+
+---
+
+### 🐞 **Bug 36: Filtro de status em Tipos de Pagamento não retorna nenhum registro**
+
+| **ID**     | **Descrição**                                                                                                                                  |
+| ---------- | ---------------------------------------------------------------------------------------------------------------------------------------------- |
+| BUG-036    | Na tela Tipos de Pagamento, ao filtrar por Status "Inativo" ou "Ativo", o sistema exibe "Nenhum tipo de pagamento encontrado", embora a lista sem filtro mostre 14 registros, todos como INATIVO. |
+
+| **Severidade do Bug** | **Prioridade de Correção** | **Status** |
+| :-------------------: | :------------------------: | :--------: |
+|         Média         |           Média            |   Aberto   |
+
+| **Passo a passo para simular o bug**                           |
+| -------------------------------------------------------------- |
+| 1. Acessar o menu "Tipos de Pagamento" |
+| 2. Selecionar "Inativo" no filtro Status e buscar |
+| 3. Repetir com o Status "Ativo" |
+
+|                        **Comportamento Esperado**                       |                        **Comportamento Obtido**                        |
+| :---------------------------------------------------------------------: | :--------------------------------------------------------------------: |
+| O filtro "Inativo" deve exibir os tipos inativos da lista. | Os dois filtros exibem "Nenhum tipo de pagamento encontrado". |
+
+| **Ambiente**             |
+| ------------------------ |
+| Ambiente de testes.      |
+| Desktop com Windows 11.  |
+| Chrome 155.0.8059.85     |
+| SIFIT                    |
+
+| **Funcionalidade Afetada** |           **Caso de Teste Relacionado**            |
+| :------------------------: | :------------------------------------------------: |
+|         Tipos de Pagamento         | C22-CT03: Filtrar tipos de pagamento por status |
+
+|                **Evidência(s)**               |
+| :-------------------------------------------: |
+| [Vídeo](https://jam.dev/c/4db1abb7-f50e-43e4-bcf2-cf768b968898) (0:22 a 0:27 e 0:47 a 0:51) |
