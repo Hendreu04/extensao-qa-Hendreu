@@ -1196,3 +1196,82 @@
 | :-------------------------------------------: |
 | [Vídeo](https://jam.dev/c/42cd2169-d05d-4486-9ca0-74e544443ed1) (0:06, 0:27 e 0:31) |
 | Consulta no banco: SHOW TABLES LIKE '%ficha%' retorna apenas exercicio_ficha, ficha_anamnese, ficha_treino, objetivo_ficha e pergunta_ficha |
+
+---
+
+### 🐞 **Bug 32: Lista de Modelos Contrato aparece vazia mesmo com modelos cadastrados**
+
+| **ID**     | **Descrição**                                                                                                                                  |
+| ---------- | ---------------------------------------------------------------------------------------------------------------------------------------------- |
+| BUG-032    | Após salvar o modelo "Contrato Hendreu", o sistema volta para a tela Modelos Contrato, que exibe apenas o cabeçalho da tabela, sem nenhum registro, sem mensagem de sucesso e sem mensagem de lista vazia. No banco, a tabela modelos_contrato tem o "Contrato Hendreu" (id 14) e outros modelos (ids 10 a 13). O Jam registra uma resposta 403 (acesso negado) do servidor. |
+
+| **Severidade do Bug** | **Prioridade de Correção** | **Status** |
+| :-------------------: | :------------------------: | :--------: |
+|         Alta         |           Alta            |   Aberto   |
+
+| **Passo a passo para simular o bug**                           |
+| -------------------------------------------------------------- |
+| 1. Acessar o menu "Modelos Contrato" |
+| 2. Clicar em "Adicionar Modelo Contrato" |
+| 3. Preencher o título "Contrato Hendreu" e o texto do contrato |
+| 4. Clicar em "Salvar modelo" |
+| 5. Observar a lista de modelos |
+
+|                        **Comportamento Esperado**                       |                        **Comportamento Obtido**                        |
+| :---------------------------------------------------------------------: | :--------------------------------------------------------------------: |
+| O modelo salvo e os demais modelos cadastrados devem aparecer na lista. | A lista aparece vazia, embora o banco tenha 5 modelos, incluindo o "Contrato Hendreu". |
+
+| **Ambiente**             |
+| ------------------------ |
+| Ambiente de testes.      |
+| Desktop com Windows 11.  |
+| Chrome 155.0.8059.85     |
+| SIFIT                    |
+
+| **Funcionalidade Afetada** |           **Caso de Teste Relacionado**            |
+| :------------------------: | :------------------------------------------------: |
+|         Modelos de Contrato         | C20-CT01: Adicionar novo modelo de contrato |
+
+|                **Evidência(s)**               |
+| :-------------------------------------------: |
+| [Vídeo](https://jam.dev/c/ba72c986-89c6-4e48-8d0f-12602f40d271) (0:26 a 0:37) |
+| Consulta no banco: modelos_contrato com os ids 10 a 14, sendo o 14 "Contrato Hendreu" ATIVO |
+
+---
+
+### 🐞 **Bug 33: Horário de criação é gravado no formato de 12 horas**
+
+| **ID**     | **Descrição**                                                                                                                                  |
+| ---------- | ---------------------------------------------------------------------------------------------------------------------------------------------- |
+| BUG-033    | A coluna created_at grava a hora sem distinguir manhã e tarde. O modelo "Contrato Hendreu" foi criado às 14:47 (UTC) e ficou gravado como 02:47:18. O login do colaborador #57 foi criado às 13:12 (UTC) e ficou gravado como 01:12:11. Com isso, os registros feitos à tarde aparecem como se tivessem sido criados de madrugada. |
+
+| **Severidade do Bug** | **Prioridade de Correção** | **Status** |
+| :-------------------: | :------------------------: | :--------: |
+|         Média         |           Média            |   Aberto   |
+
+| **Passo a passo para simular o bug**                           |
+| -------------------------------------------------------------- |
+| 1. Cadastrar um registro à tarde (ex.: um modelo de contrato) |
+| 2. Consultar no banco: SELECT id, nome, created_at FROM modelos_contrato ORDER BY id DESC LIMIT 1; |
+| 3. Comparar a hora gravada com a hora do cadastro |
+
+|                        **Comportamento Esperado**                       |                        **Comportamento Obtido**                        |
+| :---------------------------------------------------------------------: | :--------------------------------------------------------------------: |
+| A hora deve ser gravada no formato de 24 horas (14:47). | A hora é gravada como 02:47, 12 horas a menos. |
+
+| **Ambiente**             |
+| ------------------------ |
+| Ambiente de testes.      |
+| Desktop com Windows 11.  |
+| Chrome 155.0.8059.85     |
+| SIFIT                    |
+
+| **Funcionalidade Afetada** |           **Caso de Teste Relacionado**            |
+| :------------------------: | :------------------------------------------------: |
+|         Banco de dados (vários módulos)         | C20-CT01: Adicionar novo modelo de contrato |
+
+|                **Evidência(s)**               |
+| :-------------------------------------------: |
+| [Vídeo](https://jam.dev/c/ba72c986-89c6-4e48-8d0f-12602f40d271) (gravado às 11:47 de Brasília, 14:47 UTC) |
+| Consulta no banco: modelos_contrato id 14, created_at 2026-10-23 02:47:18 |
+| [Vídeo](https://jam.dev/c/64d30fb2-224f-4f30-848f-cb7adca31a22) (gravado às 13:12 UTC) e consulta no banco: login id 180, created_at 2026-10-22 01:12:11 |
