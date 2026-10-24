@@ -29,14 +29,21 @@ A estrutura está organizada por pastas, cada uma representando um sistema/teste
 
 ## 📌 Status do Projeto
 
-🚧 Em andamento
+✅ Concluído
 
 - ✅ Análise de requisitos
 - ✅ Plano de testes
 - ✅ Cenários e casos de teste
-- ⬜ Execução dos testes e evidências
-- ⬜ Relatório de bugs
-- ⬜ Relatório final
+- ✅ Execução dos testes e evidências
+- ✅ Relatório de bugs
+- ✅ Relatório final
+
+## 📊 Resultados
+
+- **40** requisitos funcionais analisados
+- **120** casos de teste executados
+- **58** bugs registrados (17 de severidade alta)
+- Detalhes no [Relatório final](SIFIT/4-%20Relatorio%20dos%20testes.md) e no [Relatório de bugs](SIFIT/3-Relatorio-de-Bugs.md)
 
 ## 🚀 Sistema testado
 
